@@ -1,0 +1,15 @@
+# psiberAI
+
+> Independent security and AI advisory for regulated enterprises. We help organizations find and fix their cryptographic exposure to quantum (post-quantum / PQC migration) and stay audit-ready across ISO/IEC 27001 (information security) and ISO/IEC 42001 (AI management). Vendor-neutral and standards-led — we do not resell products.
+
+psiberAI's lead offering is the **PQC Migration Readiness Assessment**: a fixed-scope, fixed-price engagement that produces a cryptographic inventory, a quantum-risk heat map, a gap analysis against NIST FIPS 203/204/205, and a phased, costed migration roadmap in about three weeks. It is the first step before a full migration engagement. Clients are regulated, data-sensitive organizations across the US, Europe, the UAE and Australia.
+
+## Services
+- [PQC Migration](https://psiberai.com/services/pqc-migration): Post-quantum cryptography readiness assessment and migration — cryptographic inventory, harvest-now-decrypt-later risk analysis, and a phased roadmap to NIST-standardized algorithms (ML-KEM, ML-DSA, SLH-DSA).
+- [ISO 27001](https://psiberai.com/services/iso-27001): Building and maturing an information security management system (ISMS) for audit and certification.
+- [ISO 42001](https://psiberai.com/services/iso-42001): Standing up AI governance against the ISO/IEC 42001 AI-management-system standard.
+
+## Company
+- [About](https://psiberai.com/about): Who psiberAI is and its vendor-neutral, evidence-led approach.
+- [Insights](https://psiberai.com/insights): Practical writing on PQC migration and compliance.
+- [Contact](https://psiberai.com/contact): Book a PQC Migration Readiness Assessment.

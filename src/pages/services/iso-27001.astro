@@ -1,0 +1,47 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Cta from '../../components/Cta.astro';
+---
+<Base
+  title="ISO 27001 — psiberAI"
+  description="Build or mature an ISO/IEC 27001 information security management system that passes audit and reflects how you actually operate. Vendor-neutral."
+>
+  <PageHeader
+    eyebrow="ISO/IEC 27001"
+    title="An ISMS that passes audit — and matches reality."
+    lead="We help you build or mature an information security management system that reflects how you actually run, not a binder written for the certifier and forgotten the day after."
+  />
+
+  <section class="section">
+    <div class="container prose">
+      <h2>What we do</h2>
+      <p>
+        Whether you're pursuing certification for the first time or maturing an existing ISMS,
+        we work from your real operations outward: scope the system honestly, run a gap assessment
+        against the Annex A controls, build the risk assessment and treatment plan, and produce a
+        Statement of Applicability you can defend. We prepare you for the Stage 1 and Stage 2 audits
+        and stay vendor-neutral throughout — the controls we recommend are the ones you need, not the
+        ones someone's paying us to sell.
+      </p>
+
+      <h2>Where it connects to PQC</h2>
+      <p>
+        The cryptographic inventory from a <a href="/services/pqc-migration">PQC readiness assessment</a>
+        is direct evidence for ISO 27001's cryptography controls (A.8). Clients often run the two
+        together — the inventory does double duty, and quantum readiness becomes part of the ISMS
+        rather than a separate project.
+      </p>
+
+      <h2>How we work</h2>
+      <ul>
+        <li><strong>Gap assessment</strong> — where you stand against the standard today, with a prioritized path.</li>
+        <li><strong>Risk assessment &amp; treatment</strong> — a risk register and treatment plan that reflect your actual threat landscape.</li>
+        <li><strong>Documentation</strong> — policies, the Statement of Applicability, and the evidence your auditor will ask for.</li>
+        <li><strong>Audit readiness</strong> — preparation and support through Stage 1 and Stage 2.</li>
+      </ul>
+    </div>
+  </section>
+
+  <Cta heading="Ready to get audit-ready?" body="Tell us where you are — first certification or maturing an existing ISMS — and we'll map the path." button="Talk to us" />
+</Base>

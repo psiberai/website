@@ -1,0 +1,61 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a href="/" class="brand"><span class="brand__mark">psi</span>berAI</a>
+      <p class="faint footer__tag">Post-quantum &amp; compliance readiness for regulated enterprises. Vendor-neutral, standards-led.</p>
+    </div>
+    <div class="footer__cols">
+      <div class="footer__col">
+        <p class="footer__h">Services</p>
+        <a href="/services/pqc-migration">PQC Migration</a>
+        <a href="/services/iso-27001">ISO 27001</a>
+        <a href="/services/iso-42001">ISO 42001</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h">Company</p>
+        <a href="/about">About</a>
+        <a href="/insights">Insights</a>
+        <a href="/contact">Contact</a>
+      </div>
+      <div class="footer__col">
+        <p class="footer__h">Get in touch</p>
+        <a href="mailto:hello@psiberai.com">hello@psiberai.com</a>
+        <a href="https://www.linkedin.com/company/psiberai" rel="noopener">LinkedIn</a>
+        <a href="/contact" class="footer__cta">Book a PQC Assessment →</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer__legal">
+    <span class="faint">© {year} psiberAI. All rights reserved.</span>
+    <span class="footer__legal-links">
+      <a href="/privacy">Privacy</a>
+    </span>
+  </div>
+</footer>
+
+<style>
+  .footer { border-top: 1px solid var(--line); background: var(--surface); padding-block: clamp(40px, 6vw, 60px) 22px; }
+  .footer__inner { display: grid; grid-template-columns: 1.4fr 2fr; gap: 40px; }
+  .brand { font-weight: 700; font-size: 1.2rem; color: var(--ink); letter-spacing: -.02em; }
+  .brand:hover { text-decoration: none; }
+  .brand__mark { color: var(--accent-2); }
+  :root[data-theme="dark"] .brand__mark { color: var(--accent); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand__mark { color: var(--accent); } }
+  .footer__tag { margin-top: 12px; max-width: 34ch; font-size: .9rem; line-height: 1.55; }
+  .footer__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .footer__col { display: flex; flex-direction: column; gap: 9px; }
+  .footer__h { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 3px; }
+  .footer__col a { color: var(--ink-2); font-size: .93rem; }
+  .footer__col a:hover { color: var(--accent-2); text-decoration: none; }
+  .footer__cta { color: var(--accent-2) !important; font-weight: 600; margin-top: 2px; }
+  :root[data-theme="dark"] .footer__cta { color: var(--accent) !important; }
+  .footer__legal { display: flex; justify-content: space-between; align-items: center; margin-top: 34px; padding-top: 20px; border-top: 1px solid var(--line); font-size: .84rem; }
+  .footer__legal-links a { color: var(--ink-2); }
+  @media (max-width: 780px) {
+    .footer__inner { grid-template-columns: 1fr; gap: 28px; }
+    .footer__cols { grid-template-columns: 1fr 1fr; }
+  }
+</style>

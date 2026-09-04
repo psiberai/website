@@ -1,0 +1,57 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+<Base
+  title="Contact & book — psiberAI"
+  description="Book a PQC Migration Readiness Assessment or get in touch with psiberAI."
+>
+  <PageHeader
+    eyebrow="Contact"
+    title="Book a PQC Readiness Assessment."
+    lead="Fixed scope, fixed price, a board-ready roadmap in about three weeks. Tell us a little about your estate and we'll confirm sizing and next steps."
+  />
+
+  <section class="section">
+    <div class="container contact">
+      <div class="contact__main card">
+        <h2 style="font-size:1.3rem">Start the conversation</h2>
+        <p class="muted" style="margin-top:10px">
+          The fastest path is a short call. Book a slot, or email us directly — either way you'll be
+          talking to the person who'd run the assessment, not a sales desk.
+        </p>
+        <div class="wrap-btns" style="margin-top:22px">
+          <!-- Replace href with your Cal.com link when live -->
+          <a href="mailto:hello@psiberai.com?subject=PQC%20Readiness%20Assessment" class="btn btn--primary btn--lg">Book a call</a>
+          <a href="mailto:hello@psiberai.com" class="btn btn--ghost btn--lg">Email us</a>
+        </div>
+        <p class="faint" style="margin-top:18px; font-size:.86rem">
+          Prefer email? <a href="mailto:hello@psiberai.com">hello@psiberai.com</a>
+        </p>
+      </div>
+
+      <aside class="contact__aside">
+        <h3 style="font-size:1rem">What to expect</h3>
+        <ol class="expect">
+          <li><span class="expect__n mono">1</span> A 30-minute call to understand your estate, drivers and timeline.</li>
+          <li><span class="expect__n mono">2</span> A fixed-scope, fixed-price proposal — Snapshot or full Assessment.</li>
+          <li><span class="expect__n mono">3</span> The assessment, delivered in about three weeks, ending in a live readout.</li>
+        </ol>
+        <p class="faint" style="margin-top:16px; font-size:.84rem">
+          Everything shared is treated in confidence. See our <a href="/privacy">privacy policy</a>.
+        </p>
+      </aside>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: start; }
+  @media (max-width: 820px) { .contact { grid-template-columns: 1fr; } }
+  .contact__aside { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
+  .expect { list-style: none; margin: 14px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .expect li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; color: var(--ink-2); font-size: .93rem; align-items: start; }
+  .expect__n { color: var(--accent-2); font-weight: 600; border: 1.5px solid color-mix(in srgb, var(--accent) 40%, transparent); border-radius: 7px; height: 26px; display: flex; align-items: center; justify-content: center; background: var(--accent-soft); }
+  :root[data-theme="dark"] .expect__n { color: var(--accent); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .expect__n { color: var(--accent); } }
+</style>

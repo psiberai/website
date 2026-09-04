@@ -1,0 +1,20 @@
+---
+const { eyebrow, title, lead } = Astro.props;
+---
+<header class="pagehead">
+  <div class="container">
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h1 class="pagehead__h">{title}</h1>
+    {lead && <p class="lead pagehead__lead">{lead}</p>}
+  </div>
+</header>
+
+<style>
+  .pagehead {
+    background: radial-gradient(120% 120% at 90% -20%, var(--accent-soft) 0%, transparent 48%);
+    border-bottom: 1px solid var(--line);
+    padding-block: clamp(48px, 8vw, 84px);
+  }
+  .pagehead__h { margin-top: 16px; }
+  .pagehead__lead { margin-top: 18px; max-width: 62ch; }
+</style>

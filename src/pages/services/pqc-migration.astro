@@ -1,0 +1,168 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Cta from '../../components/Cta.astro';
+
+const method = [
+  { verb: 'Discover', name: 'Cryptographic inventory', body: "Interviews, config, certificate and PKI review, targeted scans and document review to find every place crypto is used — TLS, VPNs, code signing, HSMs, databases, APIs, embedded and third-party. You can't migrate what you can't see." },
+  { verb: 'Expose', name: 'Harvest-now-decrypt-later risk', body: 'Overlay data confidentiality lifetimes. Which secrets outlive the quantum horizon and are therefore already at risk from capture-today attacks? This is where urgency becomes concrete.' },
+  { verb: 'Map', name: 'Dependencies & crypto-agility', body: 'Trace what each system depends on — vendors, libraries, protocols, hardware — and score how easily each can swap algorithms. Crypto-agility is the real migration bottleneck.' },
+  { verb: 'Prioritize', name: 'Gap vs standards & mandate', body: 'Measure the gap against NIST’s standardized PQC (ML-KEM / ML-DSA / SLH-DSA — FIPS 203/204/205) and your own mandate, then rank remediation by risk against effort.' },
+  { verb: 'Roadmap', name: 'Phased, costed plan', body: 'A sequenced plan — hybrid-crypto first, quick wins, agility upgrades, then full PQC — with dependencies, indicative effort and cost, and a board-ready executive summary, delivered in a live readout.' },
+];
+
+const deliverables = [
+  ['Cryptographic inventory register', 'The asset itself — a living record of where crypto lives. Doubles as ISO 27001 evidence.'],
+  ['Quantum-risk heat map', 'Every system ranked by harvest-now exposure and migration difficulty. The one-glance board slide.'],
+  ['Gap analysis', 'Current state vs NIST FIPS 203/204/205 and your mandate, with named gaps.'],
+  ['Phased migration roadmap', 'Sequenced plan with quick wins, dependencies, timeline and indicative cost.'],
+  ['Executive summary', 'One or two pages a CISO takes straight to the board and the auditor.'],
+  ['Live readout', 'A 90-minute presentation of findings and next steps with your leadership team.'],
+];
+---
+<Base
+  title="PQC Migration Readiness Assessment — psiberAI"
+  description="A fixed-scope, fixed-price assessment that maps your cryptographic exposure to quantum and delivers a board-ready migration roadmap in about three weeks. Vendor-neutral."
+>
+  <PageHeader
+    eyebrow="PQC Migration"
+    title="Know exactly where quantum breaks your cryptography."
+    lead="A fixed-scope, fixed-price assessment. In about three weeks you get a complete map of your cryptographic exposure, ranked by real-world risk, and a phased, costed roadmap to become quantum-safe — board-ready and vendor-neutral."
+  />
+
+  <!-- problem -->
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        <span class="eyebrow">The problem</span>
+        <h2 style="margin-top:12px">Harvest now, decrypt later.</h2>
+      </div>
+      <div class="prose">
+        <p>
+          Quantum computers will break RSA and elliptic-curve cryptography — the public-key algorithms
+          behind TLS, VPNs, signing and key exchange. The threat isn't only future: an adversary can
+          <strong>record your encrypted traffic and stored data today</strong> and decrypt it when the
+          hardware matures. Every secret with a multi-year confidentiality requirement is already exposed.
+        </p>
+        <p>
+          NIST published the standardized replacements in 2024 (ML-KEM, ML-DSA, SLH-DSA), and mandate
+          timelines are converging on the early 2030s. Migration is a multi-year program — and it can't
+          start until you know where your cryptography actually lives.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- method -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">The method</span>
+        <h2>A repeatable five-step assessment.</h2>
+      </div>
+      <ol class="method">
+        {method.map((m, i) => (
+          <li class="mstep">
+            <span class="mstep__n">{String(i + 1)}</span>
+            <div>
+              <h3 class="mstep__h"><span class="mstep__verb">{m.verb}</span> {m.name}</h3>
+              <p class="mstep__b">{m.body}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- deliverables -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">What you get</span>
+        <h2>Six concrete deliverables — vendor-neutral.</h2>
+      </div>
+      <div class="grid grid-3 delivs" style="margin-top:30px">
+        {deliverables.map(([t, d]) => (
+          <div class="deliv">
+            <h3 class="deliv__t">{t}</h3>
+            <p class="deliv__b">{d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- tiers -->
+  <section class="section">
+    <div class="container">
+      <div class="sec-head">
+        <span class="eyebrow">Engagements</span>
+        <h2>Start small, or go comprehensive.</h2>
+      </div>
+      <div class="grid grid-3 tiers" style="margin-top:30px">
+        <div class="tier">
+          <span class="tier__k mono">Snapshot</span>
+          <h3>Readiness Snapshot</h3>
+          <p class="tier__meta mono">1–2 weeks · one domain</p>
+          <p class="tier__b">A focused first look: snapshot report and risk heat map for a single domain or business unit. The low-risk way to start.</p>
+        </div>
+        <div class="tier tier--feat">
+          <span class="tier__flag mono">Most chosen</span>
+          <span class="tier__k mono">Assessment</span>
+          <h3>Migration Readiness Assessment</h3>
+          <p class="tier__meta mono">3–5 weeks · full estate</p>
+          <p class="tier__b">The full inventory, risk ranking, dependency map and board-ready phased roadmap. Scales with organization size.</p>
+        </div>
+        <div class="tier">
+          <span class="tier__k mono">Engagement</span>
+          <h3>Migration Engagement</h3>
+          <p class="tier__meta mono">custom · scoped</p>
+          <p class="tier__b">Execution of the migration itself — priced directly from the roadmap the assessment delivers.</p>
+        </div>
+      </div>
+      <p class="faint" style="margin-top:18px; font-size:.9rem">Fixed scope and fixed price agreed up front. <a href="/contact">Talk to us</a> about sizing for your estate.</p>
+    </div>
+  </section>
+
+  <Cta
+    heading="Not sure where quantum leaves you exposed?"
+    body="Book a PQC Migration Readiness Assessment — fixed scope, fixed price, a board-ready roadmap in about three weeks."
+  />
+</Base>
+
+<style>
+  .two-col { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 40px; }
+  @media (max-width: 820px) { .two-col { grid-template-columns: 1fr; gap: 18px; } }
+  .sec-head { max-width: 44ch; }
+  .sec-head h2 { margin-top: 10px; }
+
+  .method { list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+  .mstep { display: grid; grid-template-columns: 46px 1fr; gap: 18px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 22px; box-shadow: var(--shadow); }
+  .mstep__n { font-family: var(--font-mono); font-weight: 600; color: var(--accent-2); border: 1.5px solid color-mix(in srgb, var(--accent) 40%, transparent); border-radius: 9px; height: 40px; display: flex; align-items: center; justify-content: center; background: var(--accent-soft); }
+  :root[data-theme="dark"] .mstep__n { color: var(--accent); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .mstep__n { color: var(--accent); } }
+  .mstep__h { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .mstep__verb { font-family: var(--font-mono); font-size: .74rem; text-transform: uppercase; letter-spacing: .08em; color: var(--gold); }
+  .mstep__b { color: var(--ink-2); margin-top: 5px; font-size: .96rem; }
+
+  .deliv { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; box-shadow: var(--shadow); }
+  .deliv__t { font-size: 1.05rem; }
+  .deliv__b { color: var(--ink-2); margin-top: 7px; font-size: .92rem; }
+
+  .tier { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); position: relative; display: flex; flex-direction: column; gap: 8px; }
+  .tier--feat { border-color: color-mix(in srgb, var(--gold) 50%, transparent); box-shadow: 0 0 0 3px var(--gold-soft), var(--shadow); }
+  .tier__flag { position: absolute; top: -11px; left: 20px; background: var(--gold); color: #fff; font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 6px; font-weight: 600; }
+  :root[data-theme="dark"] .tier__flag { color: #0D1117; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tier__flag { color: #0D1117; } }
+  .tier__k { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .tier__meta { font-size: .82rem; color: var(--accent-2); }
+  :root[data-theme="dark"] .tier__meta { color: var(--accent); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .tier__meta { color: var(--accent); } }
+  .tier__b { color: var(--ink-2); font-size: .93rem; }
+</style>
