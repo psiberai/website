@@ -1,0 +1,32 @@
+# Production compose for the HOST (103.35.164.181).
+# Pull-based: no build context, no source needed on the box — it just runs the
+# image CI published to GHCR. Redeploy = `docker compose pull && up -d`.
+
+services:
+  frontend:
+    image: ghcr.io/psiberai/website:latest
+    container_name: psiberai-frontend
+    restart: unless-stopped
+    pull_policy: always
+    ports:
+      - "80:80" # Cloudflare sits in front at cutover (adds 443 + TLS)
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # --- future backend (kept PRIVATE image; no public port) --------------------
+  # backend:
+  #   image: ghcr.io/psiberai/website-api:latest   # private package
+  #   restart: unless-stopped
+  #   expose: ["8000"]          # internal only — never a host port
+  #   env_file: [/opt/psiberai/backend.env]   # secrets at runtime, not in the image
+  #
+  # proxy:  # routes / -> frontend, /api -> backend, terminates TLS
+  #   image: caddy:2-alpine
+  #   restart: unless-stopped
+  #   ports: ["80:80", "443:443"]
+  #   volumes: ["/opt/psiberai/Caddyfile:/etc/caddy/Caddyfile:ro"]
+  #   depends_on: [frontend, backend]
