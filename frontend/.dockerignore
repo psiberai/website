@@ -1,0 +1,12 @@
+# keep the build context small + let the container's own `npm ci` win
+node_modules
+dist
+.astro
+.git
+.gitignore
+.dockerignore
+Dockerfile
+*.log
+.DS_Store
+.vscode
+.idea
