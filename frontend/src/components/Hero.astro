@@ -1,0 +1,48 @@
+---
+/**
+ * Editorial, type-led hero — no hero image (keeps it fast + serious, in the
+ * postquantum.com register). All copy is real, no placeholders.
+ */
+---
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container hero__inner">
+    <p class="eyebrow hero__eyebrow">Post-quantum &amp; compliance readiness</p>
+    <h1 id="hero-title" class="hero__title">
+      The quantum threat is a <span class="hero__em">systems problem</span>.
+      We help you see all of it — and plan the fix.
+    </h1>
+    <p class="lead hero__lead">
+      psiberAI maps where quantum breaks your cryptography and hands you a prioritized,
+      board-ready migration roadmap — then keeps you audit-ready across ISO&nbsp;27001 and
+      ISO&nbsp;42001. Independent and vendor-neutral, so the recommendation is always yours.
+    </p>
+    <div class="wrap-btns hero__btns">
+      <a href="/contact" class="btn btn--primary btn--lg">Book a PQC Assessment</a>
+      <a href="#insights" class="btn btn--ghost btn--lg">Read the insights</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    border-bottom: 1px solid var(--line);
+    background:
+      radial-gradient(120% 120% at 88% -15%, var(--accent-soft) 0%, transparent 46%);
+  }
+  .hero__inner { padding-block: clamp(56px, 12vw, 128px); max-width: 60rem; }
+  .hero__eyebrow { margin-bottom: var(--sp-5); }
+  .hero__title {
+    font-size: clamp(2.2rem, 6.2vw, 4.1rem);
+    letter-spacing: -.025em;
+    max-width: 20ch;
+  }
+  .hero__em {
+    color: var(--accent-2);
+    /* editorial underline that scales with the type */
+    box-shadow: inset 0 -.14em 0 color-mix(in srgb, var(--accent) 22%, transparent);
+  }
+  :root[data-theme="dark"] .hero__em { color: var(--accent); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero__em { color: var(--accent); } }
+  .hero__lead { margin-top: var(--sp-5); max-width: 58ch; }
+  .hero__btns { margin-top: var(--sp-6); }
+</style>

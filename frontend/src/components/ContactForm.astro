@@ -1,0 +1,180 @@
+---
+/**
+ * Accessible contact form.
+ * - Semantic <form>/<label>/<button>; every field labelled + describedby.
+ * - Client-side validation via the SHARED lib/validation (same rules the future
+ *   backend will run).
+ * - Errors: aria-invalid + per-field aria-live message; focus jumps to the first
+ *   invalid field; input is NEVER cleared on a failed submit.
+ * - Honeypot anti-spam field, off-screen and out of the tab order.
+ * - `submitContact()` is the single seam to repoint at `/api/contact` later.
+ */
+---
+<section class="section contact" aria-labelledby="contact-title">
+  <div class="container contact__grid">
+    <div class="contact__intro">
+      <p class="eyebrow">Get in touch</p>
+      <h2 id="contact-title">Start the conversation.</h2>
+      <p class="muted contact__lead">
+        Tell us a little about your estate and what you're trying to solve. You'll hear back from the
+        person who'd actually run the work — not a sales desk — within one business day.
+      </p>
+      <ul class="contact__expect">
+        <li><span class="mono" aria-hidden="true">01</span> A short call to understand your drivers and timeline.</li>
+        <li><span class="mono" aria-hidden="true">02</span> A fixed-scope, fixed-price proposal.</li>
+        <li><span class="mono" aria-hidden="true">03</span> A board-ready roadmap in about three weeks.</li>
+      </ul>
+    </div>
+
+    <form class="contact__form card" novalidate data-contact-form aria-labelledby="contact-title">
+      <p id="cf-status" class="cf-status" role="status" aria-live="polite"></p>
+
+      <div class="field">
+        <label for="cf-name">Name <span class="req" aria-hidden="true">*</span></label>
+        <input id="cf-name" name="name" type="text" autocomplete="name"
+               required aria-required="true" aria-describedby="cf-name-err" />
+        <span id="cf-name-err" class="field__err" aria-live="polite"></span>
+      </div>
+
+      <div class="field">
+        <label for="cf-email">Work email <span class="req" aria-hidden="true">*</span></label>
+        <input id="cf-email" name="email" type="email" autocomplete="email" inputmode="email"
+               required aria-required="true" aria-describedby="cf-email-err" />
+        <span id="cf-email-err" class="field__err" aria-live="polite"></span>
+      </div>
+
+      <div class="field">
+        <label for="cf-company">Company <span class="opt">(optional)</span></label>
+        <input id="cf-company" name="company" type="text" autocomplete="organization" />
+      </div>
+
+      <div class="field">
+        <label for="cf-message">How can we help? <span class="req" aria-hidden="true">*</span></label>
+        <textarea id="cf-message" name="message" rows="4"
+                  required aria-required="true" aria-describedby="cf-message-err"></textarea>
+        <span id="cf-message-err" class="field__err" aria-live="polite"></span>
+      </div>
+
+      <!-- honeypot: off-screen + out of tab order; humans never see or fill it -->
+      <div class="cf-hp" aria-hidden="true">
+        <label for="cf-website">Leave this field blank</label>
+        <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
+
+      <button type="submit" class="btn btn--primary btn--lg cf-submit">Send message</button>
+      <p class="cf-note faint">
+        Prefer email? <a href="mailto:hello@psiberai.com">hello@psiberai.com</a>. We treat everything in confidence — see our <a href="/privacy">privacy policy</a>.
+      </p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact__grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 5vw, 56px); align-items: start; }
+  @media (max-width: 820px) { .contact__grid { grid-template-columns: 1fr; } }
+  .contact__intro h2 { margin-top: var(--sp-3); }
+  .contact__lead { margin-top: var(--sp-4); max-width: 46ch; }
+  .contact__expect { list-style: none; margin: var(--sp-5) 0 0; padding: 0; display: grid; gap: var(--sp-3); }
+  .contact__expect li { display: grid; grid-template-columns: 24px 1fr; gap: var(--sp-3); color: var(--ink-2); font-size: .95rem; }
+  .contact__expect .mono { color: var(--accent-2); font-weight: 600; font-size: .82rem; }
+  :root[data-theme="dark"] .contact__expect .mono { color: var(--accent); }
+
+  .contact__form { display: flex; flex-direction: column; gap: var(--sp-4); }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-size: .9rem; font-weight: 600; color: var(--ink); }
+  .req { color: var(--danger); }
+  .opt { font-weight: 400; color: var(--ink-3); }
+  .field input, .field textarea {
+    font-family: var(--font-sans); font-size: 1rem; color: var(--ink);
+    background: var(--paper); border: 1.5px solid var(--line-2); border-radius: var(--radius-sm);
+    padding: 11px 13px; width: 100%; min-height: 44px;
+  }
+  .field textarea { min-height: 108px; resize: vertical; }
+  .field input:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-color: var(--accent); }
+  .field input[aria-invalid="true"], .field textarea[aria-invalid="true"] {
+    border-color: var(--danger); background: var(--danger-soft);
+  }
+  .field__err { color: var(--danger); font-size: .82rem; min-height: 0; }
+  .field__err:empty { display: none; }
+
+  .cf-status { font-size: .92rem; font-weight: 500; }
+  .cf-status.is-error { color: var(--danger); }
+  .cf-status.is-ok { color: var(--good); }
+  .cf-status:empty { display: none; }
+  .cf-submit { align-self: flex-start; }
+  .cf-note { font-size: .82rem; }
+
+  /* honeypot — present in the DOM for bots, removed from view + a11y tree */
+  .cf-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+</style>
+
+<script>
+  import { validateContact } from '../lib/validation';
+
+  const form = document.querySelector('[data-contact-form]');
+  if (form instanceof HTMLFormElement) {
+    const status = form.querySelector('#cf-status');
+    const fields = ['name', 'email', 'message'];
+
+    const setFieldError = (name, message) => {
+      const input = form.elements.namedItem(name);
+      const err = form.querySelector(`#cf-${name}-err`);
+      if (input instanceof HTMLElement) input.setAttribute('aria-invalid', message ? 'true' : 'false');
+      if (err) err.textContent = message ?? '';
+    };
+
+    const setStatus = (message, kind) => {
+      if (!status) return;
+      status.textContent = message ?? '';
+      status.classList.toggle('is-error', kind === 'error');
+      status.classList.toggle('is-ok', kind === 'ok');
+    };
+
+    // The single seam to the future backend. For now: no API yet, so we validate
+    // and confirm receipt client-side. Swap the body for a POST to /api/contact
+    // (which runs the SAME validateContact server-side and returns field errors).
+    const submitContact = async (_data) => {
+      // TODO(BE): return fetch('/api/contact', { method: 'POST', body: JSON.stringify(_data) })
+      return { ok: true };
+    };
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      setStatus('', null);
+
+      const data = {
+        name: form.elements.namedItem('name')?.value ?? '',
+        email: form.elements.namedItem('email')?.value ?? '',
+        company: form.elements.namedItem('company')?.value ?? '',
+        message: form.elements.namedItem('message')?.value ?? '',
+      };
+
+      // honeypot — a filled hidden field means a bot; feign success, do nothing.
+      const hp = form.elements.namedItem('website');
+      if (hp && hp.value) { setStatus('Thanks — your message has been sent.', 'ok'); form.reset(); return; }
+
+      const errors = validateContact(data);
+      fields.forEach((f) => setFieldError(f, errors[f]));
+
+      const firstError = fields.find((f) => errors[f]);
+      if (firstError) {
+        // input is intentionally NOT cleared — values remain for the user to fix
+        setStatus('Please fix the highlighted fields and try again.', 'error');
+        form.elements.namedItem(firstError)?.focus();
+        return;
+      }
+
+      const submitBtn = form.querySelector('.cf-submit');
+      if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+      const res = await submitContact(data);
+      if (res.ok) {
+        form.reset();
+        fields.forEach((f) => setFieldError(f, undefined));
+        setStatus('Thanks — we’ll be in touch within one business day.', 'ok');
+      } else {
+        setStatus('Something went wrong sending that. Please email hello@psiberai.com.', 'error');
+      }
+      if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send message'; }
+    });
+  }
+</script>

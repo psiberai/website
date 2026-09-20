@@ -1,0 +1,46 @@
+---
+/**
+ * One insight card. Renders as an <article>. While posts are "Upcoming" the
+ * title is plain text (no dead links); when a post ships, wrap the title in an
+ * <a href> — nothing else changes.
+ */
+import { CATEGORIES } from '../data/insights.js';
+
+const { item } = Astro.props;
+const categoryLabel = CATEGORIES.find((c) => c.id === item.category)?.label ?? item.category;
+---
+<article class="icard" data-category={item.category}>
+  <div class="icard__meta">
+    <span class:list={["icard__tag", `icard__tag--${item.category}`]}>{categoryLabel}</span>
+    <span class="icard__status">{item.status}</span>
+  </div>
+  <h3 class="icard__title">{item.title}</h3>
+  <p class="icard__excerpt">{item.excerpt}</p>
+  <p class="icard__foot mono">{item.readMinutes} min read</p>
+</article>
+
+<style>
+  .icard {
+    display: flex; flex-direction: column; gap: var(--sp-3);
+    background: var(--surface); border: 1px solid var(--line);
+    border-radius: var(--radius); padding: var(--sp-5);
+    box-shadow: var(--shadow); height: 100%;
+  }
+  .icard__meta { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); }
+  .icard__tag {
+    font-family: var(--font-mono); font-size: .68rem; letter-spacing: .06em;
+    text-transform: uppercase; font-weight: 500;
+    padding: 4px 10px; border-radius: 999px;
+    color: var(--cat-pqc); background: var(--cat-pqc-soft);
+  }
+  .icard__tag--compliance { color: var(--cat-compliance); background: var(--cat-compliance-soft); }
+  .icard__tag--research { color: var(--cat-research); background: var(--cat-research-soft); }
+  .icard__status {
+    font-family: var(--font-mono); font-size: .68rem; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--ink-3);
+    border: 1px dashed var(--line-2); border-radius: 6px; padding: 3px 8px;
+  }
+  .icard__title { font-size: 1.14rem; line-height: 1.32; }
+  .icard__excerpt { color: var(--ink-2); font-size: .95rem; flex: 1; }
+  .icard__foot { font-size: .74rem; color: var(--ink-3); margin-top: auto; }
+</style>

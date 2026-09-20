@@ -1,0 +1,46 @@
+---
+/** The revenue hinge on the landing page — the productized assessment. */
+const points = [
+  ['01', 'Cryptographic inventory', 'Where crypto actually lives, across your estate.'],
+  ['02', 'Quantum-risk heat map', 'Every system ranked by harvest-now exposure.'],
+  ['03', 'Phased migration roadmap', 'Quick wins, dependencies and indicative cost.'],
+];
+---
+<section class="section offer" aria-labelledby="offer-title">
+  <div class="container">
+    <div class="offer__card">
+      <p class="badge badge--gold">Featured engagement</p>
+      <h2 id="offer-title" class="offer__title">PQC Migration Readiness Assessment</h2>
+      <p class="offer__body">
+        A fixed-scope, fixed-price engagement. In about three weeks you get a complete map of your
+        cryptographic exposure, ranked by real-world risk, and a phased, costed roadmap to become
+        quantum-safe — board-ready, vendor-neutral, and ready for your auditors.
+      </p>
+      <ul class="offer__points">
+        {points.map(([n, h, d]) => (
+          <li class="offer__pt">
+            <span class="offer__k mono" aria-hidden="true">{n}</span>
+            <span><strong>{h}</strong> — {d}</span>
+          </li>
+        ))}
+      </ul>
+      <a href="/services/pqc-migration" class="btn btn--primary btn--lg">See the assessment</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .offer__card {
+    background:
+      radial-gradient(130% 130% at 0% 0%, var(--gold-soft), transparent 55%),
+      var(--surface);
+    border: 1px solid color-mix(in srgb, var(--gold) 40%, var(--line));
+    border-radius: var(--radius-lg); padding: clamp(28px, 5vw, 48px); box-shadow: var(--shadow-lg);
+  }
+  .offer__title { margin-top: var(--sp-3); font-size: clamp(1.6rem, 3.4vw, 2.3rem); }
+  .offer__body { color: var(--ink-2); margin-top: var(--sp-4); max-width: 64ch; }
+  .offer__points { list-style: none; padding: 0; margin: var(--sp-6) 0 var(--sp-6); display: grid; gap: var(--sp-3); }
+  .offer__pt { display: flex; gap: var(--sp-4); align-items: baseline; color: var(--ink); }
+  .offer__pt strong { font-weight: 600; }
+  .offer__k { color: var(--gold); font-weight: 600; font-size: .82rem; }
+</style>

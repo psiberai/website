@@ -1,0 +1,21 @@
+---
+/** Standards / credibility strip. Text-only badges = zero image weight. */
+const standards = ['NIST FIPS 203 / 204 / 205', 'ISO/IEC 27001', 'ISO/IEC 42001'];
+---
+<section class="trust section--tight" aria-label="Standards we work to">
+  <div class="container trust__inner">
+    <p class="trust__lead">
+      Aligned to the standards that matter — and independent of every product that implements them.
+    </p>
+    <ul class="trust__badges">
+      {standards.map((s) => <li class="badge">{s}</li>)}
+      <li class="badge badge--accent">Vendor-neutral</li>
+    </ul>
+  </div>
+</section>
+
+<style>
+  .trust__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-5); flex-wrap: wrap; }
+  .trust__lead { color: var(--ink-2); max-width: 44ch; font-size: .98rem; }
+  .trust__badges { display: flex; flex-wrap: wrap; gap: 10px; list-style: none; margin: 0; padding: 0; }
+</style>

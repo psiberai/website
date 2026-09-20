@@ -1,0 +1,35 @@
+# psiberAI — single frontend container today; FE/BE-ready.
+# When the backend lands, uncomment `backend` + `proxy` below and the reverse
+# proxy routes `/` → frontend and `/api` → backend. No frontend rewrite needed.
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    image: ghcr.io/psiberai/website:latest
+    container_name: psiberai-frontend
+    restart: unless-stopped
+    ports:
+      - "80:80" # host:container — Cloudflare (or a future Caddy proxy) sits in front
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  # --- future backend (FastAPI / Node) ---------------------------------------
+  # backend:
+  #   build: { context: ./backend }
+  #   image: ghcr.io/psiberai/website-api:latest
+  #   container_name: psiberai-backend
+  #   restart: unless-stopped
+  #   expose: ["8000"]
+  #
+  # --- future reverse proxy (routes / → frontend, /api → backend, TLS) --------
+  # proxy:
+  #   image: caddy:2-alpine
+  #   restart: unless-stopped
+  #   ports: ["80:80", "443:443"]
+  #   volumes:
+  #     - ./proxy/Caddyfile:/etc/caddy/Caddyfile:ro
+  #   depends_on: [frontend, backend]

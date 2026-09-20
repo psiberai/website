@@ -1,0 +1,124 @@
+/* ===========================================================================
+   psiberAI — design tokens (SINGLE SOURCE OF TRUTH)
+   Every color, space, radius, type role and category hue is defined here.
+   Components must consume these variables, never hard-coded literals.
+   Light + dark (system default, plus explicit [data-theme] overrides).
+   =========================================================================== */
+
+:root {
+  /* neutrals — cool slate, chosen not defaulted */
+  --paper: #F5F7F9;
+  --surface: #FFFFFF;
+  --surface-2: #EDF1F5;
+  --surface-3: #E4EAF0;
+  --ink: #161B24;
+  --ink-2: #49515F;
+  --ink-3: #7A8494;
+  --line: #DBE1E9;
+  --line-2: #C8D1DC;
+
+  /* brand accent — deep teal-cyan */
+  --accent: #0C8A98;
+  --accent-2: #0A6E7A;
+  --accent-soft: #DCEEF0;
+
+  /* signal / secondary */
+  --gold: #B0821C;
+  --gold-soft: #F5EAD2;
+  --good: #2C9A67;
+  --danger: #B4402F;
+  --danger-soft: #F7E3DF;
+
+  /* insights categories (editorial tags) */
+  --cat-pqc: #0A6E7A;
+  --cat-pqc-soft: #DCEEF0;
+  --cat-compliance: #9A6D12;
+  --cat-compliance-soft: #F5EAD2;
+  --cat-research: #4F5AA8;
+  --cat-research-soft: #E6E8F6;
+
+  /* elevation */
+  --shadow-sm: 0 1px 2px rgba(20, 27, 40, .05);
+  --shadow: 0 1px 2px rgba(20, 27, 40, .05), 0 8px 24px -12px rgba(20, 27, 40, .14);
+  --shadow-lg: 0 1px 2px rgba(20, 27, 40, .06), 0 24px 56px -24px rgba(20, 27, 40, .28);
+
+  /* shape / scale */
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 18px;
+
+  /* spacing scale (4pt) */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 24px; --sp-6: 32px; --sp-7: 48px; --sp-8: 64px; --sp-9: 96px;
+
+  /* layout */
+  --maxw: 1120px;
+  --measure: 68ch;
+
+  /* type roles */
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
+
+/* dark — system preference (no explicit choice stamped) */
+:root:not([data-theme="light"]) {
+  @media (prefers-color-scheme: dark) {
+    --paper: #0D1117;
+    --surface: #161C25;
+    --surface-2: #1C242F;
+    --surface-3: #232C39;
+    --ink: #E7EBF2;
+    --ink-2: #A3ADBD;
+    --ink-3: #6C7688;
+    --line: #26303C;
+    --line-2: #3A4656;
+    --accent: #33C4D2;
+    --accent-2: #5AD3DE;
+    --accent-soft: #122A2E;
+    --gold: #DCB051;
+    --gold-soft: #2A2211;
+    --good: #4EBE89;
+    --danger: #E08472;
+    --danger-soft: #2C1712;
+    --cat-pqc: #5AD3DE;
+    --cat-pqc-soft: #122A2E;
+    --cat-compliance: #DCB051;
+    --cat-compliance-soft: #2A2211;
+    --cat-research: #9AA6E8;
+    --cat-research-soft: #1B1F33;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .3);
+    --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px -14px rgba(0, 0, 0, .6);
+    --shadow-lg: 0 1px 2px rgba(0, 0, 0, .3), 0 28px 60px -26px rgba(0, 0, 0, .75);
+  }
+}
+
+/* dark — explicit choice */
+:root[data-theme="dark"] {
+  --paper: #0D1117;
+  --surface: #161C25;
+  --surface-2: #1C242F;
+  --surface-3: #232C39;
+  --ink: #E7EBF2;
+  --ink-2: #A3ADBD;
+  --ink-3: #6C7688;
+  --line: #26303C;
+  --line-2: #3A4656;
+  --accent: #33C4D2;
+  --accent-2: #5AD3DE;
+  --accent-soft: #122A2E;
+  --gold: #DCB051;
+  --gold-soft: #2A2211;
+  --good: #4EBE89;
+  --danger: #E08472;
+  --danger-soft: #2C1712;
+  --cat-pqc: #5AD3DE;
+  --cat-pqc-soft: #122A2E;
+  --cat-compliance: #DCB051;
+  --cat-compliance-soft: #2A2211;
+  --cat-research: #9AA6E8;
+  --cat-research-soft: #1B1F33;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, .3);
+  --shadow: 0 1px 2px rgba(0, 0, 0, .3), 0 10px 30px -14px rgba(0, 0, 0, .6);
+  --shadow-lg: 0 1px 2px rgba(0, 0, 0, .3), 0 28px 60px -26px rgba(0, 0, 0, .75);
+}

@@ -1,0 +1,97 @@
+---
+/**
+ * Filterable insights feed (postquantum.com-style).
+ * Progressive enhancement: with JS off, every card is shown and the filters are
+ * simply inert buttons. The one small script filters already-rendered cards —
+ * no framework, no data fetch.
+ */
+import InsightCard from './InsightCard.astro';
+import { INSIGHTS, CATEGORIES } from '../data/insights.js';
+---
+<section id="insights" class="section feed" aria-labelledby="feed-title">
+  <div class="container">
+    <div class="feed__head">
+      <div>
+        <p class="eyebrow">Insights</p>
+        <h2 id="feed-title">Clear-eyed writing on PQC &amp; compliance.</h2>
+      </div>
+      <a href="/insights" class="btn btn--ghost">All insights</a>
+    </div>
+
+    <div class="feed__filters" role="group" aria-label="Filter insights by topic">
+      <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
+      {CATEGORIES.map((c) => (
+        <button type="button" class="chip" data-filter={c.id} aria-pressed="false">{c.label}</button>
+      ))}
+    </div>
+
+    <p class="feed__count faint mono" role="status" aria-live="polite" data-count>
+      Showing all {INSIGHTS.length} insights
+    </p>
+
+    <div class="feed__grid" data-feed-grid>
+      {INSIGHTS.map((item) => <InsightCard item={item} />)}
+    </div>
+  </div>
+</section>
+
+<style>
+  .feed__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-5); }
+  .feed__head h2 { margin-top: var(--sp-3); max-width: 24ch; }
+  .feed__filters { display: flex; flex-wrap: wrap; gap: 10px; margin: var(--sp-6) 0 var(--sp-3); }
+  .chip {
+    min-height: 40px;
+    font-family: var(--font-sans); font-size: .88rem; font-weight: 500;
+    color: var(--ink-2); background: var(--surface); border: 1px solid var(--line-2);
+    border-radius: 999px; padding: 8px 16px; cursor: pointer;
+    transition: color .15s ease, background .15s ease, border-color .15s ease;
+  }
+  .chip:hover { border-color: var(--accent-2); color: var(--accent-2); }
+  .chip.is-active { color: #fff; background: var(--accent-2); border-color: var(--accent-2); }
+  :root[data-theme="dark"] .chip.is-active { color: #0D1117; background: var(--accent); border-color: var(--accent); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .chip.is-active { color: #0D1117; background: var(--accent); border-color: var(--accent); }
+  }
+  .feed__count { margin-bottom: var(--sp-5); }
+  .feed__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  @media (max-width: 900px) { .feed__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) {
+    .feed__grid { grid-template-columns: 1fr; }
+    .feed__head { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+
+<script>
+  const grid = document.querySelector('[data-feed-grid]');
+  const chips = Array.from(document.querySelectorAll('.chip'));
+  const countEl = document.querySelector('[data-count]');
+  if (grid && chips.length) {
+    const cards = Array.from(grid.querySelectorAll('[data-category]'));
+    const labelFor = (f) =>
+      f === 'all' ? 'all' : (chips.find((c) => c.dataset.filter === f)?.textContent ?? f);
+
+    const apply = (filter) => {
+      let shown = 0;
+      cards.forEach((card) => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.hidden = !match;
+        if (match) shown += 1;
+      });
+      chips.forEach((c) => {
+        const active = c.dataset.filter === filter;
+        c.classList.toggle('is-active', active);
+        c.setAttribute('aria-pressed', String(active));
+      });
+      if (countEl) {
+        countEl.textContent =
+          filter === 'all'
+            ? `Showing all ${shown} insights`
+            : `Showing ${shown} in ${labelFor(filter)}`;
+      }
+    };
+
+    chips.forEach((chip) =>
+      chip.addEventListener('click', () => apply(chip.dataset.filter))
+    );
+  }
+</script>
