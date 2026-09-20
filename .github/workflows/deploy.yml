@@ -63,20 +63,25 @@ jobs:
           echo '${{ steps.meta.outputs.tags }}' >> "$GITHUB_STEP_SUMMARY"
           echo '```' >> "$GITHUB_STEP_SUMMARY"
 
-  # --- STEP 5: deploy to the host (added once the box + secrets are ready) -----
-  # deploy:
-  #   needs: build-and-push
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: SSH deploy
-  #       uses: appleboy/ssh-action@v1
-  #       with:
-  #         host: ${{ secrets.DEPLOY_HOST }}       # 103.35.164.181
-  #         port: ${{ secrets.DEPLOY_PORT }}       # e.g. a dedicated web-deploy port
-  #         username: ${{ secrets.DEPLOY_USER }}   # deploy
-  #         key: ${{ secrets.DEPLOY_SSH_KEY }}
-  #         script: |
-  #           cd /opt/psiberai
-  #           docker compose pull frontend
-  #           docker compose up -d frontend
-  #           docker image prune -f
+  # --- STEP 5: deploy to the host over SSH ------------------------------------
+  # Gated on the repo variable DEPLOY_ENABLED=true, so it stays inert (skipped,
+  # not failed) until the box + secrets are in place. Required repo secrets:
+  #   DEPLOY_HOST=103.35.164.181   DEPLOY_PORT=33322   DEPLOY_USER=deploy
+  #   DEPLOY_SSH_KEY=<private half of the psiberai_deploy keypair>
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    if: ${{ vars.DEPLOY_ENABLED == 'true' }}
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          port: ${{ secrets.DEPLOY_PORT }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: |
+            cd /opt/psiberai
+            docker compose pull
+            docker compose up -d
+            docker image prune -f
