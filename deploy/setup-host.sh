@@ -1,81 +1,64 @@
 #!/usr/bin/env bash
 # =============================================================================
-# psiberAI — one-time host bootstrap for the frontend container.
+# psiberAI — host bootstrap for the Cloudflare-Tunnel deployment.
 #
-# SAFE BY DESIGN on the aletix jump host (103.35.164.181):
-#   • ADDITIVE ONLY — installs Docker, deploys the frontend image, opens 80/443.
-#   • NEVER touches SSHD, port 33322, or the aletix reverse tunnel.
-#   • NEVER enables ufw (that could lock out 33322); only adds 80/443 rules if
-#     ufw is ALREADY active.
+# Brings a NEW host up to serve the site via the outbound Cloudflare Tunnel:
+# installs Docker, runs the frontend + cloudflared containers. NO public web
+# ports are opened (the tunnel is outbound), so the host's only inbound port is
+# whatever SSH you already use.
 #
-# Usage (as root, from the copied deploy/ folder on the box):
-#   sudo ./setup-host.sh
-# Redeploy later:  ./redeploy.sh   (or: cd /opt/psiberai && docker compose pull && docker compose up -d)
+# SAFE on a co-hosted box (e.g. the aletix jump host): additive only, never
+# touches SSHD / port 33322 / any existing tunnel.
+#
+# Prereq: deploy/.env next to this script with the tunnel token:
+#     CLOUDFLARE_TUNNEL_TOKEN=...
+# (get it from Zero Trust → Networks → Tunnels → your tunnel → the docker token)
+#
+# Usage (as root, from the copied deploy/ folder):
+#     sudo ./setup-host.sh
 # =============================================================================
 set -euo pipefail
 
 APP_DIR="/opt/psiberai"
 SELF_DIR="$(cd "$(dirname "$0")" && pwd)"
-COMPOSE_SRC="$SELF_DIR/docker-compose.yml"
 
 log() { printf '==> %s\n' "$*"; }
 
 [ "$(id -u)" -eq 0 ] || { echo "ERROR: run as root (sudo)."; exit 1; }
-[ -f "$COMPOSE_SRC" ] || { echo "ERROR: docker-compose.yml not found next to this script."; exit 1; }
+[ -f "$SELF_DIR/docker-compose.yml" ] || { echo "ERROR: docker-compose.yml not found next to this script."; exit 1; }
+[ -f "$SELF_DIR/.env" ] || { echo "ERROR: create deploy/.env with CLOUDFLARE_TUNNEL_TOKEN=... first (see .env.example)."; exit 1; }
 
-log "psiberAI host setup — additive; will NOT touch 33322 or the aletix tunnel."
+log "psiberAI host setup — Cloudflare Tunnel; no public web ports; SSH/tunnel untouched."
 
-# --- 1. Docker Engine + compose plugin (idempotent) --------------------------
+# --- Docker (idempotent) -----------------------------------------------------
 if command -v docker >/dev/null 2>&1; then
   log "Docker already present: $(docker --version)"
 else
-  log "Installing Docker Engine + compose plugin"
+  log "Installing Docker + compose plugin"
+  export DEBIAN_FRONTEND=noninteractive
   apt-get update -y
-  apt-get install -y ca-certificates curl
-  install -m 0755 -d /etc/apt/keyrings
-  curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-  chmod a+r /etc/apt/keyrings/docker.asc
-  . /etc/os-release
-  echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu ${VERSION_CODENAME} stable" \
-    > /etc/apt/sources.list.d/docker.list
-  apt-get update -y
-  apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  apt-get install -y docker.io docker-compose-v2
   systemctl enable --now docker
   log "Installed: $(docker --version)"
 fi
 
-# --- 2. App dir + compose ----------------------------------------------------
+# --- app dir + files ---------------------------------------------------------
 mkdir -p "$APP_DIR"
-install -m 0644 "$COMPOSE_SRC" "$APP_DIR/docker-compose.yml"
-log "Compose placed at $APP_DIR/docker-compose.yml"
+install -m 0644 "$SELF_DIR/docker-compose.yml" "$APP_DIR/docker-compose.yml"
+install -m 0600 "$SELF_DIR/.env"               "$APP_DIR/.env"
+log "compose + .env placed at $APP_DIR"
 
-# --- 3. Firewall — ONLY if ufw is already active. Never enable it. -----------
-if command -v ufw >/dev/null 2>&1 && ufw status 2>/dev/null | grep -q "Status: active"; then
-  log "ufw active — allowing 80/443 (33322 + tunnel rules left untouched)"
-  ufw allow 80/tcp  || true
-  ufw allow 443/tcp || true
-else
-  log "ufw not active — NOT enabling it (would risk locking out 33322)."
-  log "    Open 80/443 in the CloudPe firewall / security group instead."
-fi
-
-# --- 4. Pull image (public package) + run ------------------------------------
+# --- run ---------------------------------------------------------------------
 cd "$APP_DIR"
-log "Pulling image + starting the container"
+log "Pulling images + starting (frontend + cloudflared)"
 docker compose pull
 docker compose up -d
 
-# --- 5. Verify: site up + tunnel intact --------------------------------------
-sleep 3
-printf '==> local check: http://localhost/ -> '
-curl -s -o /dev/null -w 'HTTP %{http_code}\n' http://localhost/ || echo 'FAILED'
+# --- verify: tunnel connected + frontend healthy -----------------------------
+sleep 12
+log "cloudflared connections:"
+docker logs psiberai-cloudflared 2>&1 | grep -c "Registered tunnel connection" | sed 's/^/    registered: /'
+docker compose ps --format 'table {{.Name}}\t{{.Status}}' | sed 's/^/    /'
 
-printf '==> aletix tunnel/SSHD sanity: 33322 '
-if ss -ltn 2>/dev/null | grep -q ':33322'; then
-  echo 'still LISTENING (OK)'
-else
-  echo 'NOT seen — investigate before continuing!'
-fi
-
-log "Done. Verify from outside:  http://103.35.164.181/"
-log "Then: rotate the root password, and proceed to the Cloudflare cutover."
+log "Done. In Cloudflare, route the public hostname(s) to http://frontend:80."
+log "No 80/443 to open — the tunnel is outbound. Verify: https://psiberai.com"
