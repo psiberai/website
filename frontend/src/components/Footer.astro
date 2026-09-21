@@ -1,11 +1,20 @@
 ---
+import Logo from './Logo.astro';
 const year = new Date().getFullYear();
 ---
 <footer class="footer">
   <div class="container footer__inner">
     <div class="footer__brand">
-      <a href="/" class="brand"><span class="brand__mark">psi</span>berAI</a>
+      <a href="/" class="brand" aria-label="psiberAI home"><Logo height={30} /></a>
       <p class="faint footer__tag">Post-quantum &amp; compliance readiness for regulated enterprises. Vendor-neutral, standards-led.</p>
+      <div class="footer__social">
+        <a href="https://www.linkedin.com/company/psiberai" class="footer__soc" aria-label="psiberAI on LinkedIn" rel="noopener" target="_blank">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.2 8h4.6v14H.2V8zm7.5 0h4.42v1.92h.06c.62-1.17 2.13-2.4 4.38-2.4 4.68 0 5.54 3.08 5.54 7.08V22h-4.6v-6.2c0-1.48-.03-3.38-2.06-3.38-2.07 0-2.38 1.61-2.38 3.27V22H7.7V8z"/></svg>
+        </a>
+        <a href="https://x.com/psiberai" class="footer__soc" aria-label="psiberAI on X" rel="noopener" target="_blank">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.657l-5.214-6.817-5.966 6.817H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.451-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117L17.083 19.77z"/></svg>
+        </a>
+      </div>
     </div>
     <div class="footer__cols">
       <div class="footer__col">
@@ -23,7 +32,6 @@ const year = new Date().getFullYear();
       <div class="footer__col">
         <p class="footer__h">Get in touch</p>
         <a href="mailto:hello@psiberai.com">hello@psiberai.com</a>
-        <a href="https://www.linkedin.com/company/psiberai" rel="noopener">LinkedIn</a>
         <a href="/contact" class="footer__cta">Book a PQC Assessment →</a>
       </div>
     </div>
@@ -45,6 +53,10 @@ const year = new Date().getFullYear();
   :root[data-theme="dark"] .brand__mark { color: var(--accent); }
   @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .brand__mark { color: var(--accent); } }
   .footer__tag { margin-top: 12px; max-width: 34ch; font-size: .9rem; line-height: 1.55; }
+  .footer__social { display: flex; gap: 12px; margin-top: 18px; }
+  .footer__soc { display: inline-flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 9px; border: 1px solid var(--line-2); color: var(--ink-2); transition: color .15s ease, border-color .15s ease, transform .15s ease; }
+  .footer__soc:hover { color: var(--accent-2); border-color: var(--accent-2); transform: translateY(-1px); text-decoration: none; }
+  :root[data-theme="dark"] .footer__soc:hover { color: var(--accent); border-color: var(--accent); }
   .footer__cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .footer__col { display: flex; flex-direction: column; gap: 9px; }
   .footer__h { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 3px; }

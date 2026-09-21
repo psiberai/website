@@ -1,0 +1,36 @@
+---
+/**
+ * psiberAI brand mark — the quantum bra-ket ⟨Ψ|AI⟩.
+ * Blue ⟨Ψ| (cyber defence) + purple |AI⟩ (offence/AI). Colours come from
+ * --logo-blue / --logo-purple tokens, so the mark recolours per theme and
+ * stays crisp at any size. Angle brackets are drawn as strokes (font-independent).
+ */
+const { height = 30, title = 'psiberAI' } = Astro.props;
+---
+<svg
+  class="brand-logo"
+  viewBox="0 0 116 44"
+  role="img"
+  aria-label={title}
+  style={`height:${height}px;width:auto`}
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- left angle bracket ⟨ (blue) -->
+  <path d="M13 5 L4 22 L13 39" fill="none" stroke="var(--logo-blue)"
+        stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Ψ (blue) -->
+  <text x="17" y="32" font-family="var(--font-serif)" font-weight="600"
+        font-size="31" fill="var(--logo-blue)">Ψ</text>
+  <!-- divider bar | -->
+  <rect x="50" y="8" width="1.8" height="28" rx="1" fill="var(--logo-blue)" opacity="0.5" />
+  <!-- AI (purple) -->
+  <text x="57" y="32" font-family="var(--font-serif)" font-weight="600"
+        font-size="31" fill="var(--logo-purple)">AI</text>
+  <!-- right angle bracket ⟩ (purple) -->
+  <path d="M103 5 L112 22 L103 39" fill="none" stroke="var(--logo-purple)"
+        stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+</svg>
+
+<style>
+  .brand-logo { display: block; }
+</style>

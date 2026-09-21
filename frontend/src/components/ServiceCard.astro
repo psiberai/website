@@ -2,7 +2,7 @@
 const { href, name, blurb, featured = false, tag } = Astro.props;
 ---
 <a href={href} class:list={["scard", { 'scard--featured': featured }]}>
-  {tag && <span class:list={["scard__tag", featured ? 'is-gold' : '']}>{tag}</span>}
+  {tag && <span class:list={["scard__tag", featured ? 'is-purple' : '']}>{tag}</span>}
   <h3 class="scard__name">{name}</h3>
   <p class="scard__blurb">{blurb}</p>
   <span class="scard__more">Learn more →</span>
@@ -17,9 +17,9 @@ const { href, name, blurb, featured = false, tag } = Astro.props;
     transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
   }
   .scard:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); text-decoration: none; border-color: var(--line-2); }
-  .scard--featured { border-color: color-mix(in srgb, var(--gold) 50%, transparent); box-shadow: 0 0 0 3px var(--gold-soft), var(--shadow); }
+  .scard--featured { border-color: color-mix(in srgb, var(--purple) 50%, transparent); box-shadow: 0 0 0 3px var(--purple-soft), var(--shadow); }
   .scard__tag { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
-  .scard__tag.is-gold { color: var(--gold); font-weight: 600; }
+  .scard__tag.is-purple { color: var(--purple); font-weight: 600; }
   .scard__name { font-size: 1.24rem; }
   .scard__blurb { color: var(--ink-2); font-size: .96rem; line-height: 1.55; flex: 1; }
   .scard__more { color: var(--accent-2); font-weight: 600; font-size: .92rem; margin-top: 4px; }
