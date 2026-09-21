@@ -36,18 +36,50 @@ the image, starts the container, and verifies the site is up **and** that
 - From outside: `http://103.35.164.181/` serves the site.
 - Tunnel intact: `ss -ltn | grep 33322` still listening; aletix reverse tunnel unaffected.
 
+## Cloudflare cutover — via Tunnel (recommended)
+
+A **Cloudflare Tunnel** is the portable + secure edge: `cloudflared` dials OUT to
+Cloudflare, so there's **no public origin port, no A record, and no origin cert**.
+The box's 80/443 can be closed entirely.
+
+Cutover steps:
+1. Add `psiberai.com` to Cloudflare (move nameservers off GoDaddy). **Replicate the
+   MX + any other records first** so mail keeps working.
+2. Zero Trust → Networks → **Tunnels → Create a tunnel** → copy the token.
+3. Route the tunnel's **public hostname** `psiberai.com` (and `www`) to the service
+   **`http://frontend:80`**.
+4. On the box: `cd /opt/psiberai`, put the token in `deploy/.env`
+   (`CLOUDFLARE_TUNNEL_TOKEN=...`), then run with the tunnel compose:
+   ```bash
+   docker compose -f docker-compose.tunnel.yml up -d
+   ```
+5. Once traffic flows through the tunnel, **close the public web ports**:
+   `ufw delete allow 80/tcp && ufw delete allow 443/tcp` (33322 stays).
+
+### Host portability
+Because the tunnel is outbound, **moving to a new host requires no DNS or cert
+change**: stand up Docker on the new box, copy this `deploy/` folder + `.env`
+(same token), `docker compose -f docker-compose.tunnel.yml up -d`, and traffic
+follows. You can even run both hosts briefly for a zero-downtime move, then stop
+the old one. Nothing is tied to the IP.
+
+_Alternative (origin certificate):_ if you'd rather keep a public origin IP, run a
+TLS terminator (Caddy) with a Cloudflare **Origin Certificate** on 443 and set SSL
+**Full (strict)**; moving hosts then means re-pointing the `A` record to the new IP
+(the cert is hostname-bound, so it's reused as-is). The tunnel avoids all of that.
+
 ## After it's live
-1. **Rotate the root password** (it was shared in chat) and disable password SSH.
-2. **Cloudflare cutover** (final step): add the site, replicate MX, `A` → `.181`,
-   orange-cloud proxy, SSL **Full (strict)** + origin cert (add 443 to the compose
-   via the Caddy/proxy block), then lock origin 80/443 to Cloudflare IP ranges.
+- **Rotate the `.181` root password** (it was shared in chat).
 
 ## Files
-- `docker-compose.yml` — pull-based prod compose (image only, no build)
+- `docker-compose.yml` — current pull-based prod compose (frontend on host :80)
+- `docker-compose.tunnel.yml` — cutover compose (Cloudflare Tunnel; no host ports)
+- `.env.example` — template for the tunnel token (`.env` is gitignored)
 - `setup-host.sh` — one-time host bootstrap (idempotent, safe)
 - `redeploy.sh` — pull latest + restart + prune
 
-## Later: CI auto-deploy (dedicated VPS only)
-Uncomment the `deploy` job in `.github/workflows/deploy.yml` and add repo secrets:
-`DEPLOY_HOST`, `DEPLOY_PORT`, `DEPLOY_USER`, `DEPLOY_SSH_KEY`. Do this on the
-dedicated VPS, not the jump host.
+## CI auto-deploy
+Enabled: the `deploy` job in `.github/workflows/deploy.yml` runs when the repo
+variable `DEPLOY_ENABLED=true` and the secrets `DEPLOY_HOST/PORT/USER/SSH_KEY`
+are set. On the tunnel compose, point the deploy script at
+`docker compose -f docker-compose.tunnel.yml pull && up -d`.
