@@ -16,8 +16,8 @@ const insights = defineCollection({
     category: z.enum(['pqc', 'compliance', 'research']),
     pubDate: z.coerce.date(),
     author: z.string().default('psiberAI'),
-    linkedin: z.string().url().optional(),
-    readMinutes: z.number().optional(),
+    linkedin: z.string().url().nullish(),
+    readMinutes: z.number().nullish(),
     draft: z.boolean().default(false),
   }),
 });

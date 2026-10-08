@@ -17,3 +17,6 @@ pnpm-debug.log*
 # editor
 .vscode/
 .idea/
+
+# cloudflare adapter / wrangler
+.wrangler/
