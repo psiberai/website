@@ -1,12 +1,18 @@
 ---
 /**
- * Filterable insights feed (postquantum.com-style).
- * Progressive enhancement: with JS off, every card is shown and the filters are
- * simply inert buttons. The one small script filters already-rendered cards —
- * no framework, no data fetch.
+ * Insights teaser — posts-driven.
+ * Renders the latest published articles from the `insights` content collection.
+ * Until the first posts land it shows an honest placeholder (no fabricated
+ * dates or "coming soon" cards). Adding a post auto-populates this.
  */
-import InsightCard from './InsightCard.astro';
-import { INSIGHTS, CATEGORIES } from '../data/insights.js';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../data/insights.js';
+
+const catLabel = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
+const posts = (await getCollection('insights', (e) => !e.data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const latest = posts.slice(0, 3);
 ---
 <section id="insights" class="section feed" aria-labelledby="feed-title">
   <div class="container">
@@ -15,83 +21,56 @@ import { INSIGHTS, CATEGORIES } from '../data/insights.js';
         <p class="eyebrow">Insights</p>
         <h2 id="feed-title">Writing on PQC and compliance.</h2>
       </div>
-      <a href="/insights" class="btn btn--ghost">All insights</a>
+      {latest.length > 0 && <a href="/insights" class="btn btn--ghost">All insights</a>}
     </div>
 
-    <div class="feed__filters" role="group" aria-label="Filter insights by topic">
-      <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All</button>
-      {CATEGORIES.map((c) => (
-        <button type="button" class="chip" data-filter={c.id} aria-pressed="false">{c.label}</button>
-      ))}
-    </div>
-
-    <p class="feed__count faint mono" role="status" aria-live="polite" data-count>
-      Showing all {INSIGHTS.length} insights
-    </p>
-
-    <div class="feed__grid" data-feed-grid>
-      {INSIGHTS.map((item) => <InsightCard item={item} />)}
-    </div>
+    {latest.length > 0 ? (
+      <ul class="feed__list">
+        {latest.map((p) => (
+          <li class="qrow">
+            <a href={`/insights/${p.id}`} class="qrow__link">
+              <span class="qrow__cat mono">{catLabel[p.data.category]}</span>
+              <h3 class="qrow__h">{p.data.title}</h3>
+              <p class="qrow__note">{p.data.description}</p>
+              <span class="qrow__more">Read →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    ) : (
+      <div class="feed__soon">
+        <p class="feed__intro">
+          Practical, vendor-neutral writing on post-quantum migration and the compliance work
+          around it. The first articles are publishing shortly.
+        </p>
+        <a href="/contact" class="btn btn--ghost">Get them when they land</a>
+      </div>
+    )}
   </div>
 </section>
 
 <style>
   .feed__head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-5); }
   .feed__head h2 { margin-top: var(--sp-3); max-width: 24ch; }
-  .feed__filters { display: flex; flex-wrap: wrap; gap: 10px; margin: var(--sp-6) 0 var(--sp-3); }
-  .chip {
-    min-height: 40px;
-    font-family: var(--font-sans); font-size: .88rem; font-weight: 500;
-    color: var(--ink-2); background: var(--surface); border: 1px solid var(--line-2);
-    border-radius: 999px; padding: 8px 16px; cursor: pointer;
-    transition: color .15s ease, background .15s ease, border-color .15s ease;
-  }
-  .chip:hover { border-color: var(--accent-2); color: var(--accent-2); }
-  .chip.is-active { color: #fff; background: var(--accent-2); border-color: var(--accent-2); }
-  :root[data-theme="dark"] .chip.is-active { color: #0D1117; background: var(--accent); border-color: var(--accent); }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .chip.is-active { color: #0D1117; background: var(--accent); border-color: var(--accent); }
-  }
-  .feed__count { margin-bottom: var(--sp-5); }
-  .feed__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-  @media (max-width: 900px) { .feed__grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (max-width: 620px) {
-    .feed__grid { grid-template-columns: 1fr; }
-    .feed__head { flex-direction: column; align-items: flex-start; }
-  }
+
+  .feed__list { list-style: none; margin: var(--sp-6) 0 0; padding: 0; }
+  .qrow { border-top: 1px solid var(--line); }
+  .qrow:last-child { border-bottom: 1px solid var(--line); }
+  .qrow__link { display: block; padding: var(--sp-4) 0; color: var(--ink); }
+  .qrow__link:hover { text-decoration: none; }
+  .qrow__link:hover .qrow__h { color: var(--accent-2); }
+  :root[data-theme="dark"] .qrow__link:hover .qrow__h { color: var(--accent); }
+  .qrow__cat { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-2); }
+  :root[data-theme="dark"] .qrow__cat { color: var(--accent); }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .qrow__cat { color: var(--accent); } }
+  .qrow__h { font-size: 1.12rem; line-height: 1.34; margin-top: 6px; transition: color .15s ease; }
+  .qrow__note { color: var(--ink-2); font-size: .94rem; margin-top: 6px; max-width: 72ch; }
+  .qrow__more { display: inline-block; margin-top: 10px; color: var(--accent-2); font-weight: 600; font-size: .9rem; }
+  :root[data-theme="dark"] .qrow__more { color: var(--accent); }
+
+  .feed__soon { margin-top: var(--sp-5); }
+  .feed__intro { color: var(--ink-2); max-width: 60ch; }
+  .feed__soon .btn { margin-top: var(--sp-4); }
+
+  @media (max-width: 620px) { .feed__head { flex-direction: column; align-items: flex-start; } }
 </style>
-
-<script>
-  const grid = document.querySelector('[data-feed-grid]');
-  const chips = Array.from(document.querySelectorAll('.chip'));
-  const countEl = document.querySelector('[data-count]');
-  if (grid && chips.length) {
-    const cards = Array.from(grid.querySelectorAll('[data-category]'));
-    const labelFor = (f) =>
-      f === 'all' ? 'all' : (chips.find((c) => c.dataset.filter === f)?.textContent ?? f);
-
-    const apply = (filter) => {
-      let shown = 0;
-      cards.forEach((card) => {
-        const match = filter === 'all' || card.dataset.category === filter;
-        card.hidden = !match;
-        if (match) shown += 1;
-      });
-      chips.forEach((c) => {
-        const active = c.dataset.filter === filter;
-        c.classList.toggle('is-active', active);
-        c.setAttribute('aria-pressed', String(active));
-      });
-      if (countEl) {
-        countEl.textContent =
-          filter === 'all'
-            ? `Showing all ${shown} insights`
-            : `Showing ${shown} in ${labelFor(filter)}`;
-      }
-    };
-
-    chips.forEach((chip) =>
-      chip.addEventListener('click', () => apply(chip.dataset.filter))
-    );
-  }
-</script>

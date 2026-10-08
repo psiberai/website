@@ -1,0 +1,12 @@
+# Cloudflare Pages headers — ported from the old nginx config.
+# Edge (Cloudflare) also enforces HSTS / Always-HTTPS as zone settings.
+
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+# fingerprinted Astro assets — cache hard
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -2,40 +2,47 @@
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import Cta from '../../components/Cta.astro';
+import { getCollection } from 'astro:content';
+import { CATEGORIES } from '../../data/insights.js';
 
-const planned = [
-  { cat: 'PQC · Primer', title: 'What "harvest-now, decrypt-later" actually means for your data', note: 'Why data with a long shelf life is already at risk — and how to reason about which of your secrets are exposed.' },
-  { cat: 'PQC · How-to', title: 'Building a cryptographic inventory: where to look first', note: 'A practical starting map — TLS, PKI, code signing, HSMs, third parties — and the questions that surface hidden crypto.' },
-  { cat: 'PQC · Standards', title: 'ML-KEM, ML-DSA, SLH-DSA: the NIST algorithms in plain terms', note: 'What FIPS 203/204/205 standardized, what each is for, and what "hybrid" migration means in practice.' },
-  { cat: 'Compliance', title: 'Crypto controls in ISO 27001 — and how PQC readiness feeds them', note: 'How a cryptographic inventory does double duty as ISMS evidence.' },
-];
+const catLabel = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
+const posts = (await getCollection('insights', (e) => !e.data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const fmtDate = (d) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 ---
 <Base
   title="Insights — psiberAI"
-  description="Practical writing on post-quantum migration, cryptographic inventory, and compliance for regulated enterprises."
+  description="Practical, vendor-neutral writing on post-quantum migration, cryptographic inventory, and compliance for regulated enterprises."
 >
   <PageHeader
     eyebrow="Insights"
-    title="Practical guidance on PQC & compliance."
-    lead="Clear, vendor-neutral writing on post-quantum migration and the compliance work around it. We're publishing shortly — here's what's first in the queue."
+    title="Writing on PQC and compliance."
+    lead="Practical, vendor-neutral notes on post-quantum migration and the compliance work around it — no hype, no vendor pitch."
   />
 
   <section class="section">
     <div class="container">
-      <div class="grid grid-2 planned">
-        {planned.map((p) => (
-          <article class="post">
-            <span class="post__cat">{p.cat}</span>
-            <h3 class="post__h">{p.title}</h3>
-            <p class="post__note">{p.note}</p>
-            <span class="post__soon">Coming soon</span>
-          </article>
-        ))}
-      </div>
-      <p class="faint" style="margin-top:26px; font-size:.92rem">
-        Want these in your inbox as they land? The newsletter opens with the first post —
-        <a href="/contact">tell us to add you</a>.
-      </p>
+      {posts.length > 0 ? (
+        <ul class="plist">
+          {posts.map((p) => (
+            <li class="pcard">
+              <a href={`/insights/${p.id}`} class="pcard__link">
+                <span class="pcard__cat mono">{catLabel[p.data.category]}</span>
+                <h2 class="pcard__h">{p.data.title}</h2>
+                <p class="pcard__note">{p.data.description}</p>
+                <span class="pcard__meta mono">{fmtDate(p.data.pubDate)}{p.data.readMinutes ? ` · ${p.data.readMinutes} min read` : ''}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="plist__soon muted">
+          The first articles are publishing shortly.
+          <a href="/contact">Ask to be notified</a> when they land.
+        </p>
+      )}
     </div>
   </section>
 
@@ -43,11 +50,16 @@ const planned = [
 </Base>
 
 <style>
-  .post { display: flex; flex-direction: column; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
-  .post__cat { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; color: var(--accent-2); }
-  :root[data-theme="dark"] .post__cat { color: var(--accent); }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .post__cat { color: var(--accent); } }
-  .post__h { font-size: 1.2rem; line-height: 1.3; }
-  .post__note { color: var(--ink-2); font-size: .95rem; flex: 1; }
-  .post__soon { font-family: var(--font-mono); font-size: .72rem; color: var(--ink-3); border: 1px dashed var(--line-2); border-radius: 6px; padding: 3px 9px; align-self: flex-start; }
+  .plist { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; max-width: 60rem; }
+  .pcard { border-top: 1px solid var(--line); }
+  .pcard:last-child { border-bottom: 1px solid var(--line); }
+  .pcard__link { display: block; padding: var(--sp-5) 0; color: var(--ink); }
+  .pcard__link:hover { text-decoration: none; }
+  .pcard__link:hover .pcard__h { color: var(--accent-2); }
+  :root[data-theme="dark"] .pcard__link:hover .pcard__h { color: var(--accent); }
+  .pcard__cat { font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); }
+  .pcard__h { font-size: 1.22rem; line-height: 1.32; margin-top: 6px; transition: color .15s ease; }
+  .pcard__note { color: var(--ink-2); font-size: .95rem; margin-top: 8px; max-width: 68ch; }
+  .pcard__meta { display: block; margin-top: 10px; font-size: .78rem; color: var(--ink-3); }
+  .plist__soon { font-size: 1.02rem; }
 </style>
