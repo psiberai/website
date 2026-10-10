@@ -16,4 +16,10 @@ export default defineConfig({
   build: {
     inlineStylesheets: 'auto',
   },
+  vite: {
+    // @keystatic/astro imports the `astro:env/server` virtual module; keep Vite
+    // from trying to esbuild-prebundle it (which can't resolve that import) so
+    // Astro's own plugin resolves it at request/build time.
+    optimizeDeps: { exclude: ['@keystatic/astro'] },
+  },
 });
