@@ -2,11 +2,9 @@
   "eyebrow": "PQC Migration",
   "title": "Know exactly where quantum breaks your cryptography.",
   "lead": "A fixed-scope, fixed-price assessment. In about three weeks you get a complete map of your cryptographic exposure, ranked by real-world risk, and a phased, costed roadmap to become quantum-safe — written plainly enough for the board and precisely enough for the auditor.",
-
   "problemEyebrow": "The problem",
   "problemHeading": "Harvest now, decrypt later.",
   "problemBody": "Quantum computers will break RSA and elliptic-curve cryptography — the public-key algorithms behind TLS, VPNs, signing and key exchange. The threat isn't only future: an adversary can record your encrypted traffic and stored data today and decrypt it when the hardware matures. Every secret with a multi-year confidentiality requirement is already exposed.\n\nNIST published the standardized replacements in August 2024 (ML-KEM, ML-DSA, SLH-DSA), and government mandate timelines are landing in the early 2030s. Migration is a multi-year program, and it can't start until you know where your cryptography actually lives.",
-
   "methodEyebrow": "The method",
   "methodHeading": "A repeatable five-step assessment.",
   "method": [
@@ -36,7 +34,6 @@
       "body": "A sequenced plan — hybrid-crypto first, quick wins, agility upgrades, then full PQC — with dependencies, indicative effort and cost, and a board-ready executive summary, delivered in a live readout."
     }
   ],
-
   "deliverablesEyebrow": "What you get",
   "deliverablesHeading": "Six things you walk away with.",
   "deliverables": [
@@ -65,16 +62,14 @@
       "body": "A 90-minute presentation of findings and next steps with your leadership team."
     }
   ],
-
   "tiersEyebrow": "Engagements",
-  "tiersHeading": "Start small, or go comprehensive.",
+  "tiersHeading": "Start small or go comprehensive.",
   "tiers": [
     {
       "key": "Snapshot",
       "name": "Readiness Snapshot",
       "meta": "1–2 weeks · one domain",
       "body": "A focused first look: snapshot report and risk heat map for a single domain or business unit. The low-risk way to start.",
-      "flag": "",
       "featured": false
     },
     {
@@ -90,12 +85,10 @@
       "name": "Migration Engagement",
       "meta": "custom · scoped",
       "body": "Execution of the migration itself — priced directly from the roadmap the assessment delivers.",
-      "flag": "",
       "featured": false
     }
   ],
   "tiersNote": "Fixed scope and fixed price agreed up front.",
-
   "ctaHeading": "Not sure where quantum leaves you exposed?",
   "ctaBody": "Book a PQC Migration Readiness Assessment — fixed scope, fixed price, a board-ready roadmap in about three weeks."
 }
