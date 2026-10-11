@@ -1,29 +1,23 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
+import page from '../content/contact-page.json';
 ---
 <Base
   title="Contact & book — psiberAI"
   description="Book a PQC Migration Readiness Assessment or get in touch with psiberAI."
 >
-  <PageHeader
-    eyebrow="Contact"
-    title="Book a PQC Readiness Assessment."
-    lead="Fixed scope, fixed price, a board-ready roadmap in about three weeks. Tell us a little about your estate and we'll confirm sizing and next steps."
-  />
+  <PageHeader eyebrow={page.eyebrow} title={page.title} lead={page.lead} />
 
   <section class="section">
     <div class="container contact">
       <div class="contact__main card">
-        <h2 style="font-size:1.3rem">Start the conversation</h2>
-        <p class="muted" style="margin-top:10px">
-          The fastest path is a short call. Book a slot, or email us directly — either way you'll be
-          talking to the person who'd run the assessment, not a sales desk.
-        </p>
+        <h2 style="font-size:1.3rem">{page.mainHeading}</h2>
+        <p class="muted" style="margin-top:10px">{page.mainBody}</p>
         <div class="wrap-btns" style="margin-top:22px">
           <!-- Replace href with your Cal.com link when live -->
-          <a href="mailto:hello@psiberai.com?subject=PQC%20Readiness%20Assessment" class="btn btn--primary btn--lg">Book a call</a>
-          <a href="mailto:hello@psiberai.com" class="btn btn--ghost btn--lg">Email us</a>
+          <a href="mailto:hello@psiberai.com?subject=PQC%20Readiness%20Assessment" class="btn btn--primary btn--lg">{page.bookLabel}</a>
+          <a href="mailto:hello@psiberai.com" class="btn btn--ghost btn--lg">{page.emailLabel}</a>
         </div>
         <p class="faint" style="margin-top:18px; font-size:.86rem">
           Prefer email? <a href="mailto:hello@psiberai.com">hello@psiberai.com</a>
@@ -31,11 +25,11 @@ import PageHeader from '../components/PageHeader.astro';
       </div>
 
       <aside class="contact__aside">
-        <h3 style="font-size:1rem">What to expect</h3>
+        <h3 style="font-size:1rem">{page.expectHeading}</h3>
         <ol class="expect">
-          <li><span class="expect__n mono">1</span> A 30-minute call to understand your estate, drivers and timeline.</li>
-          <li><span class="expect__n mono">2</span> A fixed-scope, fixed-price proposal — Snapshot or full Assessment.</li>
-          <li><span class="expect__n mono">3</span> The assessment, delivered in about three weeks, ending in a live readout.</li>
+          {page.expectItems.map((item, i) => (
+            <li><span class="expect__n mono">{i + 1}</span> {item}</li>
+          ))}
         </ol>
         <p class="faint" style="margin-top:16px; font-size:.84rem">
           Everything shared is treated in confidence. See our <a href="/privacy">privacy policy</a>.

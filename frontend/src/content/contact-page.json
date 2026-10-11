@@ -1,0 +1,15 @@
+{
+  "eyebrow": "Contact",
+  "title": "Book a PQC Readiness Assessment.",
+  "lead": "Fixed scope, fixed price, a board-ready roadmap in about three weeks. Tell us a little about your estate and we'll confirm sizing and next steps.",
+  "mainHeading": "Start the conversation",
+  "mainBody": "The fastest path is a short call. Book a slot, or email us directly — either way you'll be talking to the person who'd run the assessment, not a sales desk.",
+  "bookLabel": "Book a call",
+  "emailLabel": "Email us",
+  "expectHeading": "What to expect",
+  "expectItems": [
+    "A 30-minute call to understand your estate, drivers and timeline.",
+    "A fixed-scope, fixed-price proposal — Snapshot or full Assessment.",
+    "The assessment, delivered in about three weeks, ending in a live readout."
+  ]
+}

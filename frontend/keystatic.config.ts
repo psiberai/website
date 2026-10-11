@@ -203,5 +203,81 @@ export default config({
         }),
       },
     }),
+    contactPage: singleton({
+      label: 'Contact page (/contact)',
+      path: 'src/content/contact-page',
+      format: { data: 'json' },
+      schema: {
+        eyebrow: fields.text({ label: 'Header — eyebrow' }),
+        title: fields.text({ label: 'Header — title', multiline: true }),
+        lead: fields.text({ label: 'Header — lead paragraph', multiline: true }),
+        mainHeading: fields.text({ label: 'Main card — heading' }),
+        mainBody: fields.text({ label: 'Main card — text', multiline: true }),
+        bookLabel: fields.text({ label: 'Primary button label (Book a call)' }),
+        emailLabel: fields.text({ label: 'Secondary button label (Email us)' }),
+        expectHeading: fields.text({ label: 'What-to-expect — heading' }),
+        expectItems: fields.array(fields.text({ label: 'Step', multiline: true }), {
+          label: 'What to expect (numbered steps)',
+          itemLabel: (p) => p.value,
+        }),
+      },
+    }),
+    pqcMigration: singleton({
+      label: 'PQC Migration page',
+      path: 'src/content/pqc-migration',
+      format: { data: 'json' },
+      schema: {
+        eyebrow: fields.text({ label: 'Header — eyebrow' }),
+        title: fields.text({ label: 'Header — title', multiline: true }),
+        lead: fields.text({ label: 'Header — lead paragraph', multiline: true }),
+
+        problemEyebrow: fields.text({ label: 'Problem — eyebrow' }),
+        problemHeading: fields.text({ label: 'Problem — heading', multiline: true }),
+        problemBody: fields.text({
+          label: 'Problem — body',
+          description: 'Leave a blank line between paragraphs.',
+          multiline: true,
+        }),
+
+        methodEyebrow: fields.text({ label: 'Method — eyebrow' }),
+        methodHeading: fields.text({ label: 'Method — heading', multiline: true }),
+        method: fields.array(
+          fields.object({
+            verb: fields.text({ label: 'Verb' }),
+            name: fields.text({ label: 'Name' }),
+            body: fields.text({ label: 'Description', multiline: true }),
+          }),
+          { label: 'Method — steps', itemLabel: (p) => `${p.fields.verb.value} — ${p.fields.name.value}` }
+        ),
+
+        deliverablesEyebrow: fields.text({ label: 'Deliverables — eyebrow' }),
+        deliverablesHeading: fields.text({ label: 'Deliverables — heading', multiline: true }),
+        deliverables: fields.array(
+          fields.object({
+            title: fields.text({ label: 'Title' }),
+            body: fields.text({ label: 'Description', multiline: true }),
+          }),
+          { label: 'Deliverables', itemLabel: (p) => p.fields.title.value }
+        ),
+
+        tiersEyebrow: fields.text({ label: 'Engagements — eyebrow' }),
+        tiersHeading: fields.text({ label: 'Engagements — heading', multiline: true }),
+        tiers: fields.array(
+          fields.object({
+            key: fields.text({ label: 'Kicker (e.g. Snapshot)' }),
+            name: fields.text({ label: 'Name' }),
+            meta: fields.text({ label: 'Meta line (duration · scope)' }),
+            body: fields.text({ label: 'Description', multiline: true }),
+            flag: fields.text({ label: 'Flag ribbon', description: 'e.g. "Most chosen". Leave blank for none.' }),
+            featured: fields.checkbox({ label: 'Featured (highlighted)' }),
+          }),
+          { label: 'Engagement tiers', itemLabel: (p) => p.fields.name.value }
+        ),
+        tiersNote: fields.text({ label: 'Engagements — footnote', multiline: true }),
+
+        ctaHeading: fields.text({ label: 'Call-to-action — heading' }),
+        ctaBody: fields.text({ label: 'Call-to-action — text', multiline: true }),
+      },
+    }),
   },
 });

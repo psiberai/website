@@ -1,0 +1,101 @@
+{
+  "eyebrow": "PQC Migration",
+  "title": "Know exactly where quantum breaks your cryptography.",
+  "lead": "A fixed-scope, fixed-price assessment. In about three weeks you get a complete map of your cryptographic exposure, ranked by real-world risk, and a phased, costed roadmap to become quantum-safe — written plainly enough for the board and precisely enough for the auditor.",
+
+  "problemEyebrow": "The problem",
+  "problemHeading": "Harvest now, decrypt later.",
+  "problemBody": "Quantum computers will break RSA and elliptic-curve cryptography — the public-key algorithms behind TLS, VPNs, signing and key exchange. The threat isn't only future: an adversary can record your encrypted traffic and stored data today and decrypt it when the hardware matures. Every secret with a multi-year confidentiality requirement is already exposed.\n\nNIST published the standardized replacements in August 2024 (ML-KEM, ML-DSA, SLH-DSA), and government mandate timelines are landing in the early 2030s. Migration is a multi-year program, and it can't start until you know where your cryptography actually lives.",
+
+  "methodEyebrow": "The method",
+  "methodHeading": "A repeatable five-step assessment.",
+  "method": [
+    {
+      "verb": "Discover",
+      "name": "Cryptographic inventory",
+      "body": "Interviews, config, certificate and PKI review, targeted scans and document review to find every place crypto is used — TLS, VPNs, code signing, HSMs, databases, APIs, embedded and third-party. You can't migrate what you can't see."
+    },
+    {
+      "verb": "Expose",
+      "name": "Harvest-now-decrypt-later risk",
+      "body": "Overlay data confidentiality lifetimes. Which secrets outlive the quantum horizon and are therefore already at risk from capture-today attacks? This is where urgency becomes concrete."
+    },
+    {
+      "verb": "Map",
+      "name": "Dependencies & crypto-agility",
+      "body": "Trace what each system depends on — vendors, libraries, protocols, hardware — and score how easily each can swap algorithms. Crypto-agility is the real migration bottleneck."
+    },
+    {
+      "verb": "Prioritize",
+      "name": "Gap vs standards & mandate",
+      "body": "Measure the gap against NIST's standardized PQC (ML-KEM / ML-DSA / SLH-DSA — FIPS 203/204/205) and your own mandate, then rank remediation by risk against effort."
+    },
+    {
+      "verb": "Roadmap",
+      "name": "Phased, costed plan",
+      "body": "A sequenced plan — hybrid-crypto first, quick wins, agility upgrades, then full PQC — with dependencies, indicative effort and cost, and a board-ready executive summary, delivered in a live readout."
+    }
+  ],
+
+  "deliverablesEyebrow": "What you get",
+  "deliverablesHeading": "Six things you walk away with.",
+  "deliverables": [
+    {
+      "title": "Cryptographic inventory register",
+      "body": "The asset itself — a living record of where crypto lives. Doubles as ISO 27001 evidence."
+    },
+    {
+      "title": "Quantum-risk heat map",
+      "body": "Every system ranked by harvest-now exposure and migration difficulty. The one-glance board slide."
+    },
+    {
+      "title": "Gap analysis",
+      "body": "Current state vs NIST FIPS 203/204/205 and your mandate, with named gaps."
+    },
+    {
+      "title": "Phased migration roadmap",
+      "body": "Sequenced plan with quick wins, dependencies, timeline and indicative cost."
+    },
+    {
+      "title": "Executive summary",
+      "body": "One or two pages a CISO takes straight to the board and the auditor."
+    },
+    {
+      "title": "Live readout",
+      "body": "A 90-minute presentation of findings and next steps with your leadership team."
+    }
+  ],
+
+  "tiersEyebrow": "Engagements",
+  "tiersHeading": "Start small, or go comprehensive.",
+  "tiers": [
+    {
+      "key": "Snapshot",
+      "name": "Readiness Snapshot",
+      "meta": "1–2 weeks · one domain",
+      "body": "A focused first look: snapshot report and risk heat map for a single domain or business unit. The low-risk way to start.",
+      "flag": "",
+      "featured": false
+    },
+    {
+      "key": "Assessment",
+      "name": "Migration Readiness Assessment",
+      "meta": "3–5 weeks · full estate",
+      "body": "The full inventory, risk ranking, dependency map and board-ready phased roadmap. Scales with organization size.",
+      "flag": "Most chosen",
+      "featured": true
+    },
+    {
+      "key": "Engagement",
+      "name": "Migration Engagement",
+      "meta": "custom · scoped",
+      "body": "Execution of the migration itself — priced directly from the roadmap the assessment delivers.",
+      "flag": "",
+      "featured": false
+    }
+  ],
+  "tiersNote": "Fixed scope and fixed price agreed up front.",
+
+  "ctaHeading": "Not sure where quantum leaves you exposed?",
+  "ctaBody": "Book a PQC Migration Readiness Assessment — fixed scope, fixed price, a board-ready roadmap in about three weeks."
+}
