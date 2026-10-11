@@ -1,7 +1,7 @@
 {
   "eyebrow": "Services",
-  "heading": "What we do, and where to start.",
-  "lead": "Three service lines. The work is independent and standards-led, and it produces evidence your board and your auditors will accept. We don't resell products, so the recommendation stays yours.",
+  "heading": "What we do and where to start.",
+  "lead": "Three service lines. The work is independent and standards-led and it produces evidence your board and your auditors will accept. We don't resell products, so the recommendation stays yours.",
   "cards": [
     {
       "name": "PQC Migration",
@@ -25,5 +25,5 @@
       "featured": false
     }
   ],
-  "note": "Where to start: most engagements begin with the PQC Migration Readiness Assessment — a fixed-scope, fixed-price piece of work that produces a concrete artifact and, usually, the roadmap for everything that follows. The cryptographic inventory it delivers also feeds directly into ISO 27001 cryptography controls, so the lines reinforce each other."
+  "note": "Where to start: most engagements begin with the PQC Migration Readiness Assessment — a fixed-scope, fixed-price piece of work that produces a concrete artifact and usually, the roadmap for everything that follows. The cryptographic inventory it delivers also feeds directly into ISO 27001 cryptography controls, so the lines reinforce each other."
 }
