@@ -1,8 +1,9 @@
 ---
+import site from '../content/site.json';
 const {
-  heading = 'Know where you stand.',
-  body = 'Book a PQC Migration Readiness Assessment: fixed scope, fixed price, and a roadmap your board can read in about three weeks.',
-  button = 'Book a PQC Assessment',
+  heading = site.ctaHeading,
+  body = site.ctaBody,
+  button = site.ctaButton,
   href = '/contact',
 } = Astro.props;
 ---

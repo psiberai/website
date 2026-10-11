@@ -1,4 +1,19 @@
 {
   "contactEmail": "gaurav.upadhyay@psiberai.com",
-  "privacyEmail": "privacy@psiberai.com"
+  "seoTitle": "psiberAI — Post-quantum & compliance readiness",
+  "seoDescription": "psiberAI helps regulated enterprises find and fix their cryptographic exposure to quantum, and stay audit-ready across ISO 27001 and ISO 42001. Vendor-neutral, standards-led.",
+  "navLinks": [
+    { "label": "Services", "href": "/services" },
+    { "label": "Insights", "href": "/insights" },
+    { "label": "About", "href": "/about" },
+    { "label": "Contact", "href": "/contact" }
+  ],
+  "navCtaLabel": "Book a PQC Assessment",
+  "ctaHeading": "Know where you stand.",
+  "ctaBody": "Book a PQC Migration Readiness Assessment: fixed scope, fixed price, and a roadmap your board can read in about three weeks.",
+  "ctaButton": "Book a PQC Assessment",
+  "brandTagline": "Post-quantum & compliance readiness for regulated enterprises. Vendor-neutral, standards-led.",
+  "linkedinUrl": "https://www.linkedin.com/company/psiberai-labs",
+  "xUrl": "https://x.com/psiberai_labs",
+  "copyrightName": "psiberAI"
 }

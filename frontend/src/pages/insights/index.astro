@@ -4,6 +4,7 @@ import PageHeader from '../../components/PageHeader.astro';
 import Cta from '../../components/Cta.astro';
 import { getCollection } from 'astro:content';
 import { CATEGORIES } from '../../data/insights.js';
+import idx from '../../content/insights-index.json';
 
 const catLabel = Object.fromEntries(CATEGORIES.map((c) => [c.id, c.label]));
 const posts = (await getCollection('insights', (e) => !e.data.draft)).sort(
@@ -16,11 +17,7 @@ const fmtDate = (d) =>
   title="Insights — psiberAI"
   description="Practical, vendor-neutral writing on post-quantum migration, cryptographic inventory, and compliance for regulated enterprises."
 >
-  <PageHeader
-    eyebrow="Insights"
-    title="Writing on PQC and compliance."
-    lead="Practical, vendor-neutral notes on post-quantum migration and the compliance work around it — no hype, no vendor pitch."
-  />
+  <PageHeader eyebrow={idx.eyebrow} title={idx.title} lead={idx.lead} />
 
   <section class="section">
     <div class="container">

@@ -1,12 +1,8 @@
 ---
 import Logo from './Logo.astro';
+import site from '../content/site.json';
 const { path = '' } = Astro.props;
-const links = [
-  { href: '/services', label: 'Services' },
-  { href: '/insights', label: 'Insights' },
-  { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
-];
+const links = site.navLinks;
 const isActive = (href) => path === href || (href !== '/' && path.startsWith(href));
 ---
 <header class="nav">
@@ -19,14 +15,14 @@ const isActive = (href) => path === href || (href !== '/' && path.startsWith(hre
         <a href={l.href} class:list={["nav__link", { 'is-active': isActive(l.href) }]}>{l.label}</a>
       ))}
     </nav>
-    <a href="/contact" class="btn btn--primary nav__cta">Book a PQC Assessment</a>
+    <a href="/contact" class="btn btn--primary nav__cta">{site.navCtaLabel}</a>
     <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false" id="navToggle">
       <span></span><span></span><span></span>
     </button>
   </div>
   <nav class="nav__mobile" id="navMobile" hidden aria-label="Mobile">
     {links.map((l) => <a href={l.href} class="nav__mlink">{l.label}</a>)}
-    <a href="/contact" class="btn btn--primary" style="margin-top:8px">Book a PQC Assessment</a>
+    <a href="/contact" class="btn btn--primary" style="margin-top:8px">{site.navCtaLabel}</a>
   </nav>
 </header>
 

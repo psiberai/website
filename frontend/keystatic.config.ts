@@ -111,7 +111,7 @@ export default config({
   },
   singletons: {
     site: singleton({
-      label: 'Site settings (email addresses)',
+      label: 'Site settings (global: nav, footer, SEO)',
       path: 'src/content/site',
       format: { data: 'json' },
       schema: {
@@ -120,10 +120,49 @@ export default config({
           description:
             'Used by the "Book a call" and "Email us" buttons, the contact form, and the footer. Just the address, e.g. hello@psiberai.com.',
         }),
-        privacyEmail: fields.text({
-          label: 'Privacy email',
-          description: 'Shown on the Privacy Policy page.',
+
+        seoTitle: fields.text({
+          label: 'Default page title (SEO)',
+          description: 'The browser-tab title / search-result headline for pages that don\'t set their own.',
         }),
+        seoDescription: fields.text({
+          label: 'Default search description (SEO)',
+          multiline: true,
+        }),
+
+        navLinks: fields.array(
+          fields.object({
+            label: fields.text({ label: 'Label' }),
+            href: fields.text({ label: 'Link (e.g. /services)' }),
+          }),
+          { label: 'Navigation menu links', itemLabel: (p) => p.fields.label.value }
+        ),
+        navCtaLabel: fields.text({
+          label: 'Header & footer button label',
+          description: 'The "Book a PQC Assessment" button in the top nav and footer.',
+        }),
+
+        ctaHeading: fields.text({
+          label: 'Call-to-action band — heading',
+          description: 'The highlighted band near the bottom of most pages. Individual pages can override this.',
+        }),
+        ctaBody: fields.text({ label: 'Call-to-action band — text', multiline: true }),
+        ctaButton: fields.text({ label: 'Call-to-action band — button label' }),
+
+        brandTagline: fields.text({ label: 'Footer — tagline', multiline: true }),
+        linkedinUrl: fields.url({ label: 'LinkedIn URL' }),
+        xUrl: fields.url({ label: 'X (Twitter) URL' }),
+        copyrightName: fields.text({ label: 'Footer — copyright name', description: 'Shown as "© <year> <name>. All rights reserved."' }),
+      },
+    }),
+    insightsIndex: singleton({
+      label: 'Insights listing page',
+      path: 'src/content/insights-index',
+      format: { data: 'json' },
+      schema: {
+        eyebrow: fields.text({ label: 'Eyebrow' }),
+        title: fields.text({ label: 'Title', multiline: true }),
+        lead: fields.text({ label: 'Lead paragraph', multiline: true }),
       },
     }),
     home: singleton({
