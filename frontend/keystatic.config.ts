@@ -23,6 +23,32 @@ export default config({
     brand: { name: 'psiberAI Insights' },
   },
   collections: {
+    pages: collection({
+      label: 'Pages (About, etc.)',
+      slugField: 'title',
+      path: 'src/content/pages/*',
+      format: { contentField: 'body' },
+      columns: ['title'],
+      schema: {
+        title: fields.slug({
+          name: {
+            label: 'Internal name',
+            description:
+              'Identifies the page in code — DO NOT rename (e.g. "About" stays "About"), or the page will stop building.',
+          },
+        }),
+        eyebrow: fields.text({ label: 'Eyebrow', description: 'Small label above the heading.' }),
+        heading: fields.text({ label: 'Page heading' }),
+        lead: fields.text({ label: 'Lead paragraph', multiline: true }),
+        body: fields.markdoc({
+          label: 'Body',
+          extension: 'md',
+          options: {
+            image: { directory: 'public/page-images', publicPath: '/page-images/' },
+          },
+        }),
+      },
+    }),
     insights: collection({
       label: 'Insights',
       slugField: 'title',

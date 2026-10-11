@@ -22,4 +22,19 @@ const insights = defineCollection({
   }),
 });
 
-export const collections = { insights };
+/**
+ * Editable marketing pages (prose) — e.g. About. Each page is one Markdown file
+ * in src/content/pages/, edited in Keystatic. Structured bits live in
+ * frontmatter (eyebrow/heading/lead); the main copy is the Markdown body.
+ */
+const pages = defineCollection({
+  loader: glob({ pattern: '**/[^_]*.md', base: './src/content/pages' }),
+  schema: z.object({
+    title: z.string(),
+    eyebrow: z.string().optional(),
+    heading: z.string(),
+    lead: z.string().optional(),
+  }),
+});
+
+export const collections = { insights, pages };
