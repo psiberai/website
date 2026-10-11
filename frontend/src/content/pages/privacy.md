@@ -7,7 +7,7 @@ heading: Privacy Policy
 
 ## Who we are
 
-psiberAI ("we", "us") provides security and AI-governance advisory services. For the purposes of data-protection law, the data controller is [legal entity name], [registered address]. Questions about this policy or your data: [privacy@psiberai.com](mailto:privacy@psiberai.com).
+PsiberAI ("we", "us") provides security and AI-governance advisory services. For the purposes of data-protection law, the data controller is [legal entity name], [registered address]. Questions about this policy or your data: [privacy@psiberai.com](mailto:privacy@psiberai.com).
 
 ## What we collect
 
