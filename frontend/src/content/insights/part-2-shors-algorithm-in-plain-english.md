@@ -1,15 +1,20 @@
 ---
-title: "Part 2: Shor's Algorithm in Plain English — The Math That Breaks the Internet's Trust Model"
-description: "A no-equations explanation of what Shor's algorithm actually does — turning factoring into period-finding — why it breaks RSA and ECC, and why 'quantum computers are too slow today' misreads the threat model."
+title: >-
+  Part 2: Shor's Algorithm in Plain English — The Math That Breaks the
+  Internet's Trust Model
+description: >-
+  A no-equations explanation of what Shor's algorithm actually does — turning
+  factoring into period-finding — why it breaks RSA and ECC, and why 'quantum
+  computers are too slow today' misreads the threat model.
 category: pqc
 pubDate: 2026-07-09
-author: "Col Gaurav Kumar Upadhyay (Retd)"
-linkedin: "https://www.linkedin.com/pulse/part-2-shors-algorithm-plain-english-math-breaks-internets-trust-n6cqf"
+author: Col Gaurav Kumar Upadhyay (Retd)
+linkedin: >-
+  https://www.linkedin.com/pulse/part-2-shors-algorithm-plain-english-math-breaks-internets-trust-n6cqf
 readMinutes: 6
 draft: false
 ---
-
-_This is Part 2 of a 10-part series on Post-Quantum Cryptography for enterprise leaders._
+*This is Part 2 of a 10-part series on Post-Quantum Cryptography for enterprise leaders.*
 
 In [Part 1](/insights/part-1-y2k-had-a-deadline-q-day-doesnt), I made a claim: the quantum threat to enterprise cryptography is real, it's already in motion through Harvest-Now-Decrypt-Later and the migration window is shorter than most leaders think. But I deliberately left the technical "why" unexplained.
 
@@ -27,9 +32,9 @@ That's the lock. Every digital trust relationship you operate sits behind it.
 
 ## What Shor's algorithm actually does
 
-In 1994, Peter Shor showed that a quantum computer could factor large numbers in polynomial time — not exponential. The difference isn't incremental. It's the difference between "longer than the universe" and "hours or days."
+In 1994, Peter Shor showed that a quantum computer could factor large numbers in [polynomial time](https://arxiv.org/pdf/quant-ph/9508027) — not exponential. The difference isn't incremental. It's the difference between "longer than the universe" and "hours or days."
 
-Here's the intuition, stripped of the math.
+Here's the intuition, stripped of the maths.
 
 RSA's security relies on the fact that factoring is essentially a search problem — you're hunting for the right pair of primes in an astronomically large space. Classical computers search that space one path at a time. They're fast, but the space is too vast.
 
@@ -69,4 +74,4 @@ Shor's gets the headlines, but there's a quieter quantum algorithm that affects 
 
 ---
 
-_Col Gaurav Kumar Upadhyay (Retd) — published researcher in Shor's algorithm (Springer ICACCT 2015) and quantum random number generation (IEEE RTEICT 2016). 21+ years in enterprise cryptographic infrastructure._
+*Col Gaurav Kumar Upadhyay (Retd) — published researcher in Shor's algorithm (Springer ICACCT 2015) and quantum random number generation (IEEE RTEICT 2016). 21+ years in enterprise cryptographic infrastructure.*
