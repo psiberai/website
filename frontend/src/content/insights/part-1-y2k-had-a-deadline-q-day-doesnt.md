@@ -55,7 +55,7 @@ That's not a technology problem you solve with a vendor purchase. It's a strateg
 
 ## Coming up next
 
-In Part 2, we'll get into the algorithm that started this entire conversation: Shor's algorithm. What it actually does, why it breaks RSA and ECC and what it means practically for enterprise systems — explained without equations, for the people who have to make decisions about it.
+In [Part 2](/insights/part-2-shors-algorithm-in-plain-english), we'll get into the algorithm that started this entire conversation: Shor's algorithm. What it actually does, why it breaks RSA and ECC and what it means practically for enterprise systems — explained without equations, for the people who have to make decisions about it.
 
 ---
 
