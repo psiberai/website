@@ -1,0 +1,29 @@
+{
+  "eyebrow": "Services",
+  "heading": "What we do, and where to start.",
+  "lead": "Three service lines. The work is independent and standards-led, and it produces evidence your board and your auditors will accept. We don't resell products, so the recommendation stays yours.",
+  "cards": [
+    {
+      "name": "PQC Migration",
+      "tag": "Post-quantum cryptography",
+      "blurb": "We inventory every place you rely on RSA and elliptic-curve crypto, then sequence the switch to ML-KEM and ML-DSA. You get a roadmap, not a scanner dump.",
+      "href": "/services/pqc-migration",
+      "featured": true
+    },
+    {
+      "name": "ISO 27001",
+      "tag": "Information security",
+      "blurb": "Build or mature an ISMS that passes audit and reflects how you actually operate — not a binder no one reads.",
+      "href": "/services/iso-27001",
+      "featured": false
+    },
+    {
+      "name": "ISO 42001",
+      "tag": "AI management",
+      "blurb": "Stand up governance for your AI systems against ISO 42001, scoped to the models you actually ship.",
+      "href": "/services/iso-42001",
+      "featured": false
+    }
+  ],
+  "note": "Where to start: most engagements begin with the PQC Migration Readiness Assessment — a fixed-scope, fixed-price piece of work that produces a concrete artifact and, usually, the roadmap for everything that follows. The cryptographic inventory it delivers also feeds directly into ISO 27001 cryptography controls, so the lines reinforce each other."
+}

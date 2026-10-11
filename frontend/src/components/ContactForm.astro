@@ -8,21 +8,20 @@
  *   invalid field; input is NEVER cleared on a failed submit.
  * - Honeypot anti-spam field, off-screen and out of the tab order.
  * - `submitContact()` is the single seam to repoint at `/api/contact` later.
+ * Intro copy is edited in Keystatic → src/content/contact.json.
  */
+import contact from '../content/contact.json';
 ---
 <section class="section contact" aria-labelledby="contact-title">
   <div class="container contact__grid">
     <div class="contact__intro">
-      <p class="eyebrow">Get in touch</p>
-      <h2 id="contact-title">Start the conversation.</h2>
-      <p class="muted contact__lead">
-        Tell us about your estate and what you're trying to solve. The person who'd actually run the
-        work reads these, and you'll hear back within one business day.
-      </p>
+      <p class="eyebrow">{contact.eyebrow}</p>
+      <h2 id="contact-title">{contact.heading}</h2>
+      <p class="muted contact__lead">{contact.lead}</p>
       <ul class="contact__expect">
-        <li><span class="mono" aria-hidden="true">01</span> A short call to understand your drivers and timeline.</li>
-        <li><span class="mono" aria-hidden="true">02</span> A fixed-scope, fixed-price proposal.</li>
-        <li><span class="mono" aria-hidden="true">03</span> A roadmap you can take to the board, in about three weeks.</li>
+        {contact.expectItems.map((item, i) => (
+          <li><span class="mono" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span> {item}</li>
+        ))}
       </ul>
     </div>
 

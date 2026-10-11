@@ -168,5 +168,40 @@ export default config({
         aboutButton: fields.text({ label: 'About snippet — button label' }),
       },
     }),
+    servicesIndex: singleton({
+      label: 'Services page',
+      path: 'src/content/services-index',
+      format: { data: 'json' },
+      schema: {
+        eyebrow: fields.text({ label: 'Eyebrow' }),
+        heading: fields.text({ label: 'Heading', multiline: true }),
+        lead: fields.text({ label: 'Lead paragraph', multiline: true }),
+        cards: fields.array(
+          fields.object({
+            name: fields.text({ label: 'Name' }),
+            tag: fields.text({ label: 'Tag' }),
+            blurb: fields.text({ label: 'Blurb', multiline: true }),
+            href: fields.text({ label: 'Link' }),
+            featured: fields.checkbox({ label: 'Featured (highlighted)' }),
+          }),
+          { label: 'Service cards', itemLabel: (p) => p.fields.name.value }
+        ),
+        note: fields.text({ label: 'Where-to-start note', multiline: true }),
+      },
+    }),
+    contact: singleton({
+      label: 'Home — contact form',
+      path: 'src/content/contact',
+      format: { data: 'json' },
+      schema: {
+        eyebrow: fields.text({ label: 'Eyebrow' }),
+        heading: fields.text({ label: 'Heading' }),
+        lead: fields.text({ label: 'Lead paragraph', multiline: true }),
+        expectItems: fields.array(fields.text({ label: 'Step' }), {
+          label: 'What to expect (numbered steps)',
+          itemLabel: (p) => p.value,
+        }),
+      },
+    }),
   },
 });

@@ -3,46 +3,21 @@ import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import ServiceCard from '../../components/ServiceCard.astro';
 import Cta from '../../components/Cta.astro';
+import svc from '../../content/services-index.json';
 ---
 <Base title="Services — psiberAI" description="PQC migration, ISO 27001, and ISO 42001 — vendor-neutral security and AI-governance advisory for regulated enterprises.">
-  <PageHeader
-    eyebrow="Services"
-    title="What we do, and where to start."
-    lead="Three service lines. The work is independent and standards-led, and it produces evidence your board and your auditors will accept. We don't resell products, so the recommendation stays yours."
-  />
+  <PageHeader eyebrow={svc.eyebrow} title={svc.heading} lead={svc.lead} />
 
   <section class="section">
     <div class="container">
       <div class="grid grid-3">
-        <ServiceCard
-          href="/services/pqc-migration"
-          name="PQC Migration"
-          tag="Post-quantum cryptography"
-          featured={true}
-          blurb="We inventory every place you rely on RSA and elliptic-curve crypto, then sequence the switch to ML-KEM and ML-DSA. You get a roadmap, not a scanner dump."
-        />
-        <ServiceCard
-          href="/services/iso-27001"
-          name="ISO 27001"
-          tag="Information security"
-          blurb="Build or mature an ISMS that passes audit and reflects how you actually operate — not a binder no one reads."
-        />
-        <ServiceCard
-          href="/services/iso-42001"
-          name="ISO 42001"
-          tag="AI management"
-          blurb="Stand up governance for your AI systems against ISO 42001, scoped to the models you actually ship."
-        />
+        {svc.cards.map((c) => (
+          <ServiceCard href={c.href} name={c.name} tag={c.tag} blurb={c.blurb} featured={c.featured} />
+        ))}
       </div>
 
       <div class="services-note prose" style="margin-top:40px">
-        <p>
-          <strong>Where to start:</strong> most engagements begin with the
-          <a href="/services/pqc-migration">PQC Migration Readiness Assessment</a> — a fixed-scope,
-          fixed-price piece of work that produces a concrete artifact and, usually, the roadmap for
-          everything that follows. The cryptographic inventory it delivers also feeds directly into
-          ISO 27001 cryptography controls, so the lines reinforce each other.
-        </p>
+        <p>{svc.note}</p>
       </div>
     </div>
   </section>
