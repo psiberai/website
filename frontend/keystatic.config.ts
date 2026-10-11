@@ -47,6 +47,9 @@ export default config({
             image: { directory: 'public/page-images', publicPath: '/page-images/' },
           },
         }),
+        ctaHeading: fields.text({ label: 'Call-to-action heading', description: 'Bottom band. Leave blank for the site default.' }),
+        ctaBody: fields.text({ label: 'Call-to-action text', multiline: true, description: 'Leave blank for the site default.' }),
+        ctaButton: fields.text({ label: 'Call-to-action button label', description: 'Leave blank for the site default.' }),
       },
     }),
     insights: collection({

@@ -34,6 +34,10 @@ const pages = defineCollection({
     eyebrow: z.string().optional(),
     heading: z.string(),
     lead: z.string().optional(),
+    // Optional override for the bottom call-to-action band (blank = site default).
+    ctaHeading: z.string().nullish(),
+    ctaBody: z.string().nullish(),
+    ctaButton: z.string().nullish(),
   }),
 });
 
