@@ -1,16 +1,13 @@
 ---
-/** Standards / credibility strip. Text-only badges = zero image weight. */
-const standards = ['NIST FIPS 203 / 204 / 205', 'ISO/IEC 27001', 'ISO/IEC 42001'];
+/** Standards / credibility strip. Copy edited in Keystatic → src/content/home.json. */
+import home from '../content/home.json';
 ---
 <section class="trust section--tight" aria-label="Standards we work to">
   <div class="container trust__inner">
-    <p class="trust__lead">
-      We work to NIST's PQC standards and to ISO 27001 and 42001. We're tied to none of the vendors
-      that sell them.
-    </p>
+    <p class="trust__lead">{home.trustLead}</p>
     <ul class="trust__badges">
-      {standards.map((s) => <li class="badge">{s}</li>)}
-      <li class="badge badge--accent">Vendor-neutral</li>
+      {home.trustBadges.map((s) => <li class="badge">{s}</li>)}
+      {home.trustAccentBadge && <li class="badge badge--accent">{home.trustAccentBadge}</li>}
     </ul>
   </div>
 </section>

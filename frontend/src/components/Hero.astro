@@ -1,26 +1,17 @@
 ---
 /**
- * Editorial, type-led hero — no hero image (keeps it fast + serious, in the
- * postquantum.com register). All copy is real, no placeholders.
+ * Editorial, type-led hero. Copy is edited in Keystatic → src/content/home.json.
  */
+import home from '../content/home.json';
 ---
 <section class="hero" aria-labelledby="hero-title">
   <div class="container hero__inner">
-    <p class="eyebrow hero__eyebrow">Post-quantum &amp; compliance readiness</p>
-    <h1 id="hero-title" class="hero__title">
-      Your encryption has an <span class="hero__em">expiry date</span>.
-      We help you find where it's hiding.
-    </h1>
-    <p class="lead hero__lead">
-      RSA and elliptic-curve keys protect almost everything you store, and a big enough
-      quantum computer breaks both. NIST finalized the replacements in August&nbsp;2024. We find
-      where that aging cryptography still lives in your stack — TLS, PKI, code signing, HSMs,
-      vendors — and give you a migration order you can actually sequence. The ISO&nbsp;27001 and
-      ISO&nbsp;42001 work around it, too. We don't resell products, so there's nothing to upsell.
-    </p>
+    <p class="eyebrow hero__eyebrow">{home.heroEyebrow}</p>
+    <h1 id="hero-title" class="hero__title">{home.heroTitle}</h1>
+    <p class="lead hero__lead">{home.heroLead}</p>
     <div class="wrap-btns hero__btns">
-      <a href="/contact" class="btn btn--primary btn--lg">Book a PQC Assessment</a>
-      <a href="#insights" class="btn btn--ghost btn--lg">Read the insights</a>
+      <a href="/contact" class="btn btn--primary btn--lg">{home.heroCtaPrimary}</a>
+      <a href="#insights" class="btn btn--ghost btn--lg">{home.heroCtaSecondary}</a>
     </div>
   </div>
 </section>
@@ -38,13 +29,6 @@
     letter-spacing: -.025em;
     max-width: 20ch;
   }
-  .hero__em {
-    color: var(--accent-2);
-    /* editorial underline that scales with the type */
-    box-shadow: inset 0 -.14em 0 color-mix(in srgb, var(--accent) 22%, transparent);
-  }
-  :root[data-theme="dark"] .hero__em { color: var(--accent); }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .hero__em { color: var(--accent); } }
   .hero__lead { margin-top: var(--sp-5); max-width: 58ch; }
   .hero__btns { margin-top: var(--sp-6); }
 </style>

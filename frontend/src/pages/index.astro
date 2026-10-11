@@ -6,6 +6,9 @@ import ServiceCard from '../components/ServiceCard.astro';
 import InsightsFeed from '../components/InsightsFeed.astro';
 import FeaturedOffer from '../components/FeaturedOffer.astro';
 import ContactForm from '../components/ContactForm.astro';
+import home from '../content/home.json';
+
+const whyNowParas = home.whyNowBody.split(/\n\s*\n/).filter((p) => p.trim());
 ---
 <Base>
   <Hero />
@@ -17,29 +20,13 @@ import ContactForm from '../components/ContactForm.astro';
   <section class="section" aria-labelledby="svc-title">
     <div class="container">
       <div class="sec-head">
-        <p class="eyebrow">What we do</p>
-        <h2 id="svc-title">PQC migration leads. ISO 27001 and 42001 sit alongside it.</h2>
+        <p class="eyebrow">{home.servicesEyebrow}</p>
+        <h2 id="svc-title">{home.servicesHeading}</h2>
       </div>
       <div class="grid grid-3" style="margin-top:32px">
-        <ServiceCard
-          href="/services/pqc-migration"
-          name="PQC Migration"
-          tag="Post-quantum cryptography"
-          featured={true}
-          blurb="We inventory every place you rely on RSA and elliptic-curve crypto, then sequence the switch to ML-KEM and ML-DSA. You get a roadmap, not a scanner dump."
-        />
-        <ServiceCard
-          href="/services/iso-27001"
-          name="ISO 27001"
-          tag="Information security"
-          blurb="Build or mature an ISMS that reflects how you actually operate and still clears the Stage 2 audit."
-        />
-        <ServiceCard
-          href="/services/iso-42001"
-          name="ISO 42001"
-          tag="AI management"
-          blurb="Govern your AI systems against ISO 42001, scoped to the models you actually ship."
-        />
+        {home.cards.map((c) => (
+          <ServiceCard href={c.href} name={c.name} tag={c.tag} blurb={c.blurb} featured={c.featured} />
+        ))}
       </div>
     </div>
   </section>
@@ -50,22 +37,11 @@ import ContactForm from '../components/ContactForm.astro';
   <section class="section whynow" aria-labelledby="why-title">
     <div class="container whynow__inner">
       <div>
-        <p class="eyebrow">Why now</p>
-        <h2 id="why-title" class="whynow__h">The clock is already running.</h2>
+        <p class="eyebrow">{home.whyNowEyebrow}</p>
+        <h2 id="why-title" class="whynow__h">{home.whyNowHeading}</h2>
       </div>
       <div class="prose whynow__body">
-        <p>
-          Quantum computers will break the public-key cryptography — RSA, elliptic curve — that protects
-          almost everything you send and store. Adversaries don't need to wait: they can
-          <strong>capture your encrypted data today and decrypt it once the hardware arrives</strong>.
-          Any secret with a shelf life measured in years is already exposed.
-        </p>
-        <p>
-          NIST finalized the replacement algorithms — ML-KEM, ML-DSA and SLH-DSA — in August 2024, and
-          government mandate timelines are landing in the early 2030s. The migration is a multi-year
-          program. It can't begin until you can see where your cryptography actually lives, which is
-          <strong>what an assessment is for</strong>.
-        </p>
+        {whyNowParas.map((p) => <p>{p}</p>)}
       </div>
     </div>
   </section>
@@ -79,12 +55,9 @@ import ContactForm from '../components/ContactForm.astro';
   <!-- ABOUT -->
   <section class="section about" aria-labelledby="about-title">
     <div class="container about__inner">
-      <p class="eyebrow" id="about-title">Independent by design</p>
-      <p class="about__lead serif">
-        psiberAI is an independent security and AI advisory. We don't resell products or take referral
-        fees, so an assessment answers one question: <em>what's actually right for your estate</em>.
-      </p>
-      <a href="/about" class="btn btn--ghost">About psiberAI</a>
+      <p class="eyebrow" id="about-title">{home.aboutEyebrow}</p>
+      <p class="about__lead serif">{home.aboutLead}</p>
+      <a href="/about" class="btn btn--ghost">{home.aboutButton}</a>
     </div>
   </section>
 

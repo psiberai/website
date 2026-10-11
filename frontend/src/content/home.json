@@ -1,0 +1,51 @@
+{
+  "heroEyebrow": "Post-quantum & compliance readiness",
+  "heroTitle": "Your encryption has an expiry date. We help you find where it's hiding.",
+  "heroLead": "RSA and elliptic-curve keys protect almost everything you store, and a big enough quantum computer breaks both. NIST finalized the replacements in August 2024. We find where that aging cryptography still lives in your stack — TLS, PKI, code signing, HSMs, vendors — and give you a migration order you can actually sequence. The ISO 27001 and ISO 42001 work around it, too. We don't resell products, so there's nothing to upsell.",
+  "heroCtaPrimary": "Book a PQC Assessment",
+  "heroCtaSecondary": "Read the insights",
+  "trustLead": "We work to NIST's PQC standards and to ISO 27001 and 42001. We're tied to none of the vendors that sell them.",
+  "trustBadges": ["NIST FIPS 203 / 204 / 205", "ISO/IEC 27001", "ISO/IEC 42001"],
+  "trustAccentBadge": "Vendor-neutral",
+  "servicesEyebrow": "What we do",
+  "servicesHeading": "PQC migration leads. ISO 27001 and 42001 sit alongside it.",
+  "cards": [
+    {
+      "name": "PQC Migration",
+      "tag": "Post-quantum cryptography",
+      "blurb": "We inventory every place you rely on RSA and elliptic-curve crypto, then sequence the switch to ML-KEM and ML-DSA. You get a roadmap, not a scanner dump.",
+      "href": "/services/pqc-migration",
+      "featured": true
+    },
+    {
+      "name": "ISO 27001",
+      "tag": "Information security",
+      "blurb": "Build or mature an ISMS that reflects how you actually operate and still clears the Stage 2 audit.",
+      "href": "/services/iso-27001",
+      "featured": false
+    },
+    {
+      "name": "ISO 42001",
+      "tag": "AI management",
+      "blurb": "Govern your AI systems against ISO 42001, scoped to the models you actually ship.",
+      "href": "/services/iso-42001",
+      "featured": false
+    }
+  ],
+  "whyNowEyebrow": "Why now",
+  "whyNowHeading": "The clock is already running.",
+  "whyNowBody": "Quantum computers will break the public-key cryptography — RSA, elliptic curve — that protects almost everything you send and store. Adversaries don't need to wait: they can capture your encrypted data today and decrypt it once the hardware arrives. Any secret with a shelf life measured in years is already exposed.\n\nNIST finalized the replacement algorithms — ML-KEM, ML-DSA and SLH-DSA — in August 2024, and government mandate timelines are landing in the early 2030s. The migration is a multi-year program. It can't begin until you can see where your cryptography actually lives, which is what an assessment is for.",
+  "offerBadge": "Featured engagement",
+  "offerTitle": "PQC Migration Readiness Assessment",
+  "offerBody": "A fixed-scope, fixed-price engagement. In about three weeks you get a full map of where your cryptography is exposed, ranked by real-world risk, and a phased, costed roadmap to become quantum-safe. It's written for two readers at once: the board and the auditor.",
+  "offerPoints": [
+    { "num": "01", "head": "Cryptographic inventory", "desc": "Where crypto actually lives, across your estate." },
+    { "num": "02", "head": "Quantum-risk heat map", "desc": "Every system ranked by harvest-now exposure." },
+    { "num": "03", "head": "Phased migration roadmap", "desc": "Quick wins, dependencies and indicative cost." }
+  ],
+  "offerCta": "See the assessment",
+  "offerHref": "/services/pqc-migration",
+  "aboutEyebrow": "Independent by design",
+  "aboutLead": "psiberAI is an independent security and AI advisory. We don't resell products or take referral fees, so an assessment answers one question: what's actually right for your estate.",
+  "aboutButton": "About psiberAI"
+}

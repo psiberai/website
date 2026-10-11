@@ -1,30 +1,22 @@
 ---
-/** The revenue hinge on the landing page — the productized assessment. */
-const points = [
-  ['01', 'Cryptographic inventory', 'Where crypto actually lives, across your estate.'],
-  ['02', 'Quantum-risk heat map', 'Every system ranked by harvest-now exposure.'],
-  ['03', 'Phased migration roadmap', 'Quick wins, dependencies and indicative cost.'],
-];
+/** The revenue hinge on the landing page. Copy edited in Keystatic → src/content/home.json. */
+import home from '../content/home.json';
 ---
 <section class="section offer" aria-labelledby="offer-title">
   <div class="container">
     <div class="offer__card">
-      <p class="badge badge--purple">Featured engagement</p>
-      <h2 id="offer-title" class="offer__title">PQC Migration Readiness Assessment</h2>
-      <p class="offer__body">
-        A fixed-scope, fixed-price engagement. In about three weeks you get a full map of where your
-        cryptography is exposed, ranked by real-world risk, and a phased, costed roadmap to become
-        quantum-safe. It's written for two readers at once: the board and the auditor.
-      </p>
+      <p class="badge badge--purple">{home.offerBadge}</p>
+      <h2 id="offer-title" class="offer__title">{home.offerTitle}</h2>
+      <p class="offer__body">{home.offerBody}</p>
       <ul class="offer__points">
-        {points.map(([n, h, d]) => (
+        {home.offerPoints.map((pt) => (
           <li class="offer__pt">
-            <span class="offer__k mono" aria-hidden="true">{n}</span>
-            <span><strong>{h}</strong> — {d}</span>
+            <span class="offer__k mono" aria-hidden="true">{pt.num}</span>
+            <span><strong>{pt.head}</strong> — {pt.desc}</span>
           </li>
         ))}
       </ul>
-      <a href="/services/pqc-migration" class="btn btn--primary btn--lg">See the assessment</a>
+      <a href={home.offerHref} class="btn btn--primary btn--lg">{home.offerCta}</a>
     </div>
   </div>
 </section>

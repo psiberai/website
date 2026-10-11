@@ -1,4 +1,4 @@
-import { config, collection, fields } from '@keystatic/core';
+import { config, collection, singleton, fields } from '@keystatic/core';
 
 /**
  * Keystatic — the in-browser editor for the Insights blog.
@@ -106,6 +106,66 @@ export default config({
             },
           },
         }),
+      },
+    }),
+  },
+  singletons: {
+    home: singleton({
+      label: 'Home page',
+      path: 'src/content/home',
+      format: { data: 'json' },
+      schema: {
+        heroEyebrow: fields.text({ label: 'Hero — eyebrow' }),
+        heroTitle: fields.text({ label: 'Hero — headline', multiline: true }),
+        heroLead: fields.text({ label: 'Hero — lead paragraph', multiline: true }),
+        heroCtaPrimary: fields.text({ label: 'Hero — primary button label' }),
+        heroCtaSecondary: fields.text({ label: 'Hero — secondary button label' }),
+
+        trustLead: fields.text({ label: 'Trust strip — text', multiline: true }),
+        trustBadges: fields.array(fields.text({ label: 'Badge' }), {
+          label: 'Trust strip — standard badges',
+          itemLabel: (p) => p.value,
+        }),
+        trustAccentBadge: fields.text({ label: 'Trust strip — highlighted badge' }),
+
+        servicesEyebrow: fields.text({ label: 'Services — eyebrow' }),
+        servicesHeading: fields.text({ label: 'Services — heading', multiline: true }),
+        cards: fields.array(
+          fields.object({
+            name: fields.text({ label: 'Name' }),
+            tag: fields.text({ label: 'Tag' }),
+            blurb: fields.text({ label: 'Blurb', multiline: true }),
+            href: fields.text({ label: 'Link' }),
+            featured: fields.checkbox({ label: 'Featured (highlighted)' }),
+          }),
+          { label: 'Services — cards', itemLabel: (p) => p.fields.name.value }
+        ),
+
+        whyNowEyebrow: fields.text({ label: 'Why now — eyebrow' }),
+        whyNowHeading: fields.text({ label: 'Why now — heading', multiline: true }),
+        whyNowBody: fields.text({
+          label: 'Why now — body',
+          description: 'Leave a blank line between paragraphs.',
+          multiline: true,
+        }),
+
+        offerBadge: fields.text({ label: 'Offer — badge' }),
+        offerTitle: fields.text({ label: 'Offer — title', multiline: true }),
+        offerBody: fields.text({ label: 'Offer — body', multiline: true }),
+        offerPoints: fields.array(
+          fields.object({
+            num: fields.text({ label: 'Number' }),
+            head: fields.text({ label: 'Heading' }),
+            desc: fields.text({ label: 'Description', multiline: true }),
+          }),
+          { label: 'Offer — points', itemLabel: (p) => p.fields.head.value }
+        ),
+        offerCta: fields.text({ label: 'Offer — button label' }),
+        offerHref: fields.text({ label: 'Offer — button link' }),
+
+        aboutEyebrow: fields.text({ label: 'About snippet — eyebrow' }),
+        aboutLead: fields.text({ label: 'About snippet — text', multiline: true }),
+        aboutButton: fields.text({ label: 'About snippet — button label' }),
       },
     }),
   },
