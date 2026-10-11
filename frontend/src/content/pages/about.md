@@ -1,11 +1,13 @@
 ---
 title: About
 eyebrow: About
-heading: "Independent security & AI advisory."
-lead: "psiberAI helps regulated enterprises get ahead of the quantum threat and stay audit-ready across information security and AI governance. Everything we hand over is something you can verify yourself."
+heading: Independent security & AI advisory.
+lead: >-
+  PsiberAI helps regulated enterprises get ahead of the quantum threat and stay
+  audit-ready across information security and AI governance. Everything we hand
+  over is something you can verify yourself.
 ---
-
-## What we believe
+## What we practise
 
 Security advice should come with **proof**. When we flag a risk, you see the inventory entry it came from, not a severity score we invented. When we say you're covered, you get evidence an auditor will accept. If we can't show you something, it doesn't go in the report.
 
