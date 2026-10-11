@@ -11,6 +11,7 @@
  * Intro copy is edited in Keystatic → src/content/contact.json.
  */
 import contact from '../content/contact.json';
+import site from '../content/site.json';
 ---
 <section class="section contact" aria-labelledby="contact-title">
   <div class="container contact__grid">
@@ -25,7 +26,7 @@ import contact from '../content/contact.json';
       </ul>
     </div>
 
-    <form class="contact__form card" novalidate data-contact-form aria-labelledby="contact-title">
+    <form class="contact__form card" novalidate data-contact-form data-contact-email={site.contactEmail} aria-labelledby="contact-title">
       <p id="cf-status" class="cf-status" role="status" aria-live="polite"></p>
 
       <div class="field">
@@ -62,7 +63,7 @@ import contact from '../content/contact.json';
 
       <button type="submit" class="btn btn--primary btn--lg cf-submit">Send message</button>
       <p class="cf-note faint">
-        Prefer email? <a href="mailto:hello@psiberai.com">hello@psiberai.com</a>. We treat everything in confidence — see our <a href="/privacy">privacy policy</a>.
+        Prefer email? <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>. We treat everything in confidence — see our <a href="/privacy">privacy policy</a>.
       </p>
     </form>
   </div>
@@ -114,6 +115,7 @@ import contact from '../content/contact.json';
   if (form instanceof HTMLFormElement) {
     const status = form.querySelector('#cf-status');
     const fields = ['name', 'email', 'message'];
+    const contactEmail = form.dataset.contactEmail || 'hello@psiberai.com';
 
     const setFieldError = (name, message) => {
       const input = form.elements.namedItem(name);
@@ -171,7 +173,7 @@ import contact from '../content/contact.json';
         fields.forEach((f) => setFieldError(f, undefined));
         setStatus('Thanks — we’ll be in touch within one business day.', 'ok');
       } else {
-        setStatus('Something went wrong sending that. Please email hello@psiberai.com.', 'error');
+        setStatus(`Something went wrong sending that. Please email ${contactEmail}.`, 'error');
       }
       if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Send message'; }
     });

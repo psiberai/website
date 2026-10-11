@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
+import site from '../content/site.json';
 const updated = 'September 2026';
 ---
 <Base
@@ -17,7 +18,7 @@ const updated = 'September 2026';
       <p>
         psiberAI ("we", "us") provides security and AI-governance advisory services. For the purposes of
         data-protection law, the data controller is [legal entity name], [registered address].
-        Questions about this policy or your data: <a href="mailto:privacy@psiberai.com">privacy@psiberai.com</a>.
+        Questions about this policy or your data: <a href={`mailto:${site.privacyEmail}`}>{site.privacyEmail}</a>.
       </p>
 
       <h2>What we collect</h2>
@@ -64,7 +65,7 @@ const updated = 'September 2026';
       <p>
         Depending on where you live, you may have the right to access, correct, delete, or port your data,
         to object to or restrict processing, and to withdraw consent. To exercise any of these, email
-        <a href="mailto:privacy@psiberai.com">privacy@psiberai.com</a>. You may also complain to your local
+        <a href={`mailto:${site.privacyEmail}`}>{site.privacyEmail}</a>. You may also complain to your local
         data-protection authority.
       </p>
 

@@ -1,5 +1,6 @@
 ---
 import Logo from './Logo.astro';
+import site from '../content/site.json';
 const year = new Date().getFullYear();
 ---
 <footer class="footer">
@@ -31,7 +32,7 @@ const year = new Date().getFullYear();
       </div>
       <div class="footer__col">
         <p class="footer__h">Get in touch</p>
-        <a href="mailto:hello@psiberai.com">hello@psiberai.com</a>
+        <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
         <a href="/contact" class="footer__cta">Book a PQC Assessment →</a>
       </div>
     </div>

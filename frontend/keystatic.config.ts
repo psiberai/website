@@ -110,6 +110,22 @@ export default config({
     }),
   },
   singletons: {
+    site: singleton({
+      label: 'Site settings (email addresses)',
+      path: 'src/content/site',
+      format: { data: 'json' },
+      schema: {
+        contactEmail: fields.text({
+          label: 'Contact / booking email',
+          description:
+            'Used by the "Book a call" and "Email us" buttons, the contact form, and the footer. Just the address, e.g. hello@psiberai.com.',
+        }),
+        privacyEmail: fields.text({
+          label: 'Privacy email',
+          description: 'Shown on the Privacy Policy page.',
+        }),
+      },
+    }),
     home: singleton({
       label: 'Home page',
       path: 'src/content/home',

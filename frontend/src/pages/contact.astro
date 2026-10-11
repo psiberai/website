@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
 import page from '../content/contact-page.json';
+import site from '../content/site.json';
 ---
 <Base
   title="Contact & book — psiberAI"
@@ -16,11 +17,11 @@ import page from '../content/contact-page.json';
         <p class="muted" style="margin-top:10px">{page.mainBody}</p>
         <div class="wrap-btns" style="margin-top:22px">
           <!-- Replace href with your Cal.com link when live -->
-          <a href="mailto:hello@psiberai.com?subject=PQC%20Readiness%20Assessment" class="btn btn--primary btn--lg">{page.bookLabel}</a>
-          <a href="mailto:hello@psiberai.com" class="btn btn--ghost btn--lg">{page.emailLabel}</a>
+          <a href={`mailto:${site.contactEmail}?subject=PQC%20Readiness%20Assessment`} class="btn btn--primary btn--lg">{page.bookLabel}</a>
+          <a href={`mailto:${site.contactEmail}`} class="btn btn--ghost btn--lg">{page.emailLabel}</a>
         </div>
         <p class="faint" style="margin-top:18px; font-size:.86rem">
-          Prefer email? <a href="mailto:hello@psiberai.com">hello@psiberai.com</a>
+          Prefer email? <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
         </p>
       </div>
 
