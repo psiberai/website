@@ -1,7 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Cta from '../../components/Cta.astro';
 import { CATEGORIES } from '../../data/insights.js';
 
 export async function getStaticPaths() {
@@ -38,8 +37,6 @@ const fmtDate = post.data.pubDate.toLocaleDateString('en-US', {
       <p class="post__back"><a href="/insights">← All insights</a></p>
     </div>
   </article>
-
-  <Cta />
 </Base>
 
 <style>

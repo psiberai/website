@@ -1,7 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHeader from '../components/PageHeader.astro';
-import Cta from '../components/Cta.astro';
 import { getEntry, render } from 'astro:content';
 
 // Copy is edited in Keystatic → src/content/pages/about.md
@@ -19,6 +18,4 @@ const { Content } = await render(page);
       <Content />
     </div>
   </section>
-
-  <Cta />
 </Base>

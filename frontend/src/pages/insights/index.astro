@@ -1,7 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import Cta from '../../components/Cta.astro';
 import { getCollection } from 'astro:content';
 import { CATEGORIES } from '../../data/insights.js';
 import idx from '../../content/insights-index.json';
@@ -42,8 +41,6 @@ const fmtDate = (d) =>
       )}
     </div>
   </section>
-
-  <Cta />
 </Base>
 
 <style>
