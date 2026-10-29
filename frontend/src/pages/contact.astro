@@ -26,6 +26,12 @@ const bookHref = hasBooking
           <a href={bookHref} class="btn btn--primary btn--lg" {...(hasBooking ? { target: '_blank', rel: 'noopener' } : {})}>{page.bookLabel}</a>
           <a href={`mailto:${site.contactEmail}`} class="btn btn--ghost btn--lg">{page.emailLabel}</a>
         </div>
+        {hasBooking && (
+          <div class="book-qr">
+            <img src="/book-qr.png" alt="QR code to book a call with psiberAI" width="104" height="104" loading="lazy" />
+            <p class="faint">Scan to book a call from your phone.</p>
+          </div>
+        )}
         <p class="faint" style="margin-top:18px; font-size:.86rem">
           Prefer email? <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a>
         </p>
@@ -47,6 +53,11 @@ const bookHref = hasBooking
 </Base>
 
 <style>
+  .book-qr { display: flex; align-items: center; gap: 16px; margin-top: 22px; }
+  .book-qr img { width: 104px; height: 104px; flex: none; background: #fff; padding: 8px; border-radius: 10px; border: 1px solid var(--line); }
+  .book-qr p { margin: 0; font-size: .86rem; max-width: 20ch; }
+  @media (max-width: 420px) { .book-qr { flex-direction: column; align-items: flex-start; } }
+
   .contact { display: grid; grid-template-columns: 1.4fr 1fr; gap: 24px; align-items: start; }
   @media (max-width: 820px) { .contact { grid-template-columns: 1fr; } }
   .contact__aside { background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; }
