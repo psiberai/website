@@ -268,6 +268,11 @@ export default config({
         lead: fields.text({ label: 'Header — lead paragraph', multiline: true }),
         mainHeading: fields.text({ label: 'Main card — heading' }),
         mainBody: fields.text({ label: 'Main card — text', multiline: true }),
+        bookingUrl: fields.url({
+          label: 'Booking link (Calendly / Cal.com)',
+          description:
+            'Paste your scheduling link, e.g. https://calendly.com/you/intro. The "Book a call" button opens it in a new tab. Leave blank to fall back to email.',
+        }),
         bookLabel: fields.text({ label: 'Primary button label (Book a call)' }),
         emailLabel: fields.text({ label: 'Secondary button label (Email us)' }),
         expectHeading: fields.text({ label: 'What-to-expect — heading' }),
