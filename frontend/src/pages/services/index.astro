@@ -15,9 +15,26 @@ import svc from '../../content/services-index.json';
         ))}
       </div>
 
-      <div class="services-note prose" style="margin-top:40px">
+      <div class="services-note">
         <p>{svc.note}</p>
       </div>
     </div>
   </section>
 </Base>
+
+<style>
+  .services-note {
+    margin-top: 40px;
+    padding: clamp(20px, 3vw, 28px) clamp(22px, 3.5vw, 32px);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent-2);
+    border-radius: var(--radius);
+  }
+  .services-note p {
+    margin: 0;
+    max-width: none;
+    color: var(--ink-2);
+    line-height: 1.65;
+  }
+</style>
