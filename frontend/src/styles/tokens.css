@@ -41,7 +41,7 @@
 
   /* logo fills (theme-aware so the mark stays legible on both grounds) */
   --logo-blue: #0B1F50;
-  --logo-purple: #54189C;
+  --logo-accent: #0E7CE8;
 
   /* elevation */
   --shadow-sm: 0 1px 2px rgba(11, 18, 51, .06);
@@ -85,7 +85,7 @@
     --cat-research: #4FC7D6;
     --cat-research-soft: #0F2A2E;
     --logo-blue: #8097FF;
-    --logo-purple: #C08BEA;
+    --logo-accent: #4FA3F0;
     --shadow-sm: 0 1px 2px rgba(0, 0, 0, .35);
     --shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 10px 30px -14px rgba(0, 0, 0, .65);
     --shadow-lg: 0 1px 2px rgba(0, 0, 0, .35), 0 28px 60px -26px rgba(0, 0, 0, .78);
@@ -118,7 +118,7 @@
   --cat-research: #4FC7D6;
   --cat-research-soft: #0F2A2E;
   --logo-blue: #8097FF;
-  --logo-purple: #C08BEA;
+  --logo-accent: #4FA3F0;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, .35);
   --shadow: 0 1px 2px rgba(0, 0, 0, .35), 0 10px 30px -14px rgba(0, 0, 0, .65);
   --shadow-lg: 0 1px 2px rgba(0, 0, 0, .35), 0 28px 60px -26px rgba(0, 0, 0, .78);
